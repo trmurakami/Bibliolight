@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
+    <meta name="author" content="Tiago Murakami">
     <title>Biblioteca Bibliolight</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
+    <link rel="canonical" href="https://github.com/trmurakami/bibliolight">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -48,11 +47,11 @@
   <p class="lead">Ferramenta de gestão de acervo da Biblioteca Bibliolight.</p>
 
   <div class="container">
-    <form>
+    <form action="search.php">
     <div class="form-group">
     <label for="exampleInputEmail1">Pesquisar</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite a expressão de busca">
-    <small id="emailHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
+    <input type="text" class="form-control" id="search" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
+    <small id="searchHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
     </div>
     <button type="submit" class="btn btn-primary">Pesquisar</button>
     </form>

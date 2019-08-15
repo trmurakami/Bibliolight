@@ -10,7 +10,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
 
-    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -41,7 +40,7 @@
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>
   </nav>
-  <a class="btn btn-outline-primary" href="#">Login</a>
+  <a class="btn btn-outline-primary" href="login.php">Login</a>
 </div>
 
 <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -65,7 +64,7 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-        <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
+        <small class="d-block mb-3 text-muted">&copy; 2019</small>
       </div>
       <div class="col-6 col-md">
         <h5>Features</h5>

@@ -20,7 +20,7 @@
   <div class="container">
     <h1>Editor</h1>
 
-    <form>
+    <form action="search.php">
     <div class="form-group row">
       <label for="title" class="col-sm-2 col-form-label">Título</label>
       <div class="col-sm-10">

@@ -44,35 +44,30 @@
   <p class="lead">Ferramenta de gestão de acervo da Biblioteca Bibliolight.</p>
 
   <div class="container">
-    <form action="search.php">
+    <form action="search.php" method="get">
     <div class="form-group">
-    <label for="exampleInputEmail1">Pesquisar</label>
-    <input type="text" class="form-control" id="search" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
+    <label for="searchHelp">Pesquisar</label>
+    <input type="text" class="form-control" id="search" name="search[]" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
     <small id="searchHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
     </div>
     <button type="submit" class="btn btn-primary">Pesquisar</button>
     </form>
   </div>
 </div>
-<!-- 
 <div class="container">
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
       <div class="col-12 col-md">
-        <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-        <small class="d-block mb-3 text-muted">&copy; 2019</small>
+        <!-- <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
+        <small class="d-block mb-3 text-muted">Desenvolvido com <a target="_blank" rel="noopener noreferrer nofollow" href="https://github.com/trmurakami/bibliolight">Bibliolight</a></small>
       </div>
       <div class="col-6 col-md">
-        <h5>Features</h5>
+        <h5>Estatísticas</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Cool stuff</a></li>
-          <li><a class="text-muted" href="#">Random feature</a></li>
-          <li><a class="text-muted" href="#">Team feature</a></li>
-          <li><a class="text-muted" href="#">Stuff for developers</a></li>
-          <li><a class="text-muted" href="#">Another one</a></li>
-          <li><a class="text-muted" href="#">Last time</a></li>
+          <li><a class="text-muted" href="#">Quantidade de registros: </a></li>
         </ul>
       </div>
+      <!--
       <div class="col-6 col-md">
         <h5>Resources</h5>
         <ul class="list-unstyled text-small">
@@ -91,9 +86,10 @@
           <li><a class="text-muted" href="#">Terms</a></li>
         </ul>
       </div>
+      -->
     </div>
   </footer>
 </div>
--->
+
 </body>
 </html>

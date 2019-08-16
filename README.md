@@ -1,5 +1,5 @@
 # bibliolight
-Software livre para bibliotecas 
+Software livre para gestão de acervos bibliográficos
 
 
 

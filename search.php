@@ -1,5 +1,5 @@
 <?php
-            require 'inc/functions.php';
+  require 'inc/config.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,6 +17,8 @@
 
   </head>
   <body>
+
+  
 
   </body>
 </html>

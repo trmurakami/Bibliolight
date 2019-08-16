@@ -81,6 +81,7 @@ class Elasticsearch
             $params["index"] = $index;
         }
 
+        $params["type"] = $index;
         $params["id"] = $_id;
         $params["body"] = $body;
 
@@ -170,7 +171,7 @@ Class Homepage
         }
         '; 
         $response = Elasticsearch::search(null, 0, $body);
-        print_r($response);
+        return $response["hits"]["total"];
 
     }    
 

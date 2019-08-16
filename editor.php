@@ -2,19 +2,25 @@
   require 'inc/config.php';
   require 'inc/functions.php';
 
-  var_dump($_POST);
+  use Ramsey\Uuid\Uuid;
+  use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
-  if (isset($_POST)) {
-    print_r($_POST);
-    //$query["doc"]["name"] = $_POST["name"];
-    //$query["doc"]["datePublished"] = $_POST["datePublished"];
-    //$query["doc"]["publisher"]["organization"]["name"] = $_POST["publisher_organization_name"];
-    //$query["doc_as_upsert"] = true;
-    //$resultado = elasticsearch::elastic_update($_POST["_id"], $type, $query);
-    //print_r($resultado);
-    //sleep(5); 
-    //echo '<script>window.location = \'result_trabalhos.php?filter[]=name:"'.$_POST["name"].'"\'</script>';
-}
+
+  if (isset($_REQUEST["ID"])) {
+      //print_r($_REQUEST);
+      $query["doc"]["title"] = $_REQUEST["title"];
+      //$query["doc"]["datePublished"] = $_POST["datePublished"];
+      $query["doc"]["publisher"] = $_REQUEST["publisher"];
+      $query["doc_as_upsert"] = true;
+      print_r($query);
+      $result = Elasticsearch::update($_REQUEST["ID"], $query);
+      print_r($result);
+      sleep(5); 
+      //echo '<script>window.location = \'search.php?filter[]=title:"'.$_POST["title"].'"\'</script>';
+  } else {
+    $uuid4 = Uuid::uuid4();
+    $uuid = $uuid4->toString();
+  }
 
 ?>
 <!doctype html>
@@ -38,15 +44,21 @@
 
     <form action="editor.php" method="post">
     <div class="form-group row">
+      <label for="ID" class="col-sm-2 col-form-label">ID</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="ID" name="ID" value="<?php echo $uuid; ?>">
+      </div>
+    </div>
+    <div class="form-group row">
       <label for="title" class="col-sm-2 col-form-label">Título</label>
       <div class="col-sm-10">
           <input type="text" class="form-control" id="title" name="title" placeholder="Insira o título">
       </div>
     </div>
     <div class="form-group row">
-      <label for="editor" class="col-sm-2 col-form-label">Editora</label>
+      <label for="publisher" class="col-sm-2 col-form-label">Editora</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" id="editor" name="editor" placeholder="Insira a editora">
+          <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Insira a editora">
       </div>
     </div>      
     <button type="submit" class="btn btn-primary">Salvar</button>

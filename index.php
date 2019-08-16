@@ -1,3 +1,7 @@
+<?php
+  require 'inc/config.php';
+  require 'inc/functions.php';
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -64,7 +68,7 @@
       <div class="col-6 col-md">
         <h5>Estatísticas</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Quantidade de registros: </a></li>
+          <li><a class="text-muted" href="#">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
         </ul>
       </div>
       <!--

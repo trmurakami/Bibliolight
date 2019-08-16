@@ -58,11 +58,11 @@
                         echo '
                         <div class="card mb-3">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
                                 <!-- <img src="..." class="card-img" alt="Capa"> -->
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title">'.$r["_source"]["title"].'</h5>
                                     <p class="card-text">Autores: SOBRENOME, Nome</p>
@@ -76,7 +76,22 @@
                     }                
                 ?>                
                 </div>
-                <div class="col-6 col-md-4 themed-grid-col">Refinar busca</div>
+                <div class="col-6 col-md-4 themed-grid-col">
+
+                    <div class="list-group">
+
+                        <?php
+                            $facets = new Facets();
+                            $facets->query = $result_get['query'];
+                            if (!isset($_GET["search"])) {
+                                $_GET["search"] = null;
+                            }
+                            $facets->facet("publisher", 10, "Editora", null, "_term", $_GET["search"], true);
+                        ?>
+                        
+                    </div>               
+                
+                </div>
             </div>
         </div>
 

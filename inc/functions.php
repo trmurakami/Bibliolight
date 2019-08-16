@@ -268,8 +268,6 @@ class Facets
 
         $result_count = count($response["aggregations"]["counts"]["buckets"]);
 
-        print_r($response);
-
         if ($result_count == 0) {
 
         } elseif (($result_count != 0) && ($result_count < 5)) {
@@ -290,30 +288,20 @@ class Facets
             echo '<a href="#" style="color:#333">'.$field_name.'</a>';
             echo ' <ul class="uk-nav-sub">';
             while ($i < 5) {
-                if ($response["aggregations"]["counts"]["buckets"][$i]['key'] == "Não preenchido") {
-                    echo '<li>';
-                    echo '<div uk-grid>
-                            <div class="uk-width-expand uk-text-small" style="color:#333">
-                                <a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&search[]=(-_exists_:'.$field.')">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-                            </div>
-                            <div class="uk-width-auto" style="color:#333">
-                            <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
-                            </div>';
-                    echo '</div></li>';
-                } else {
-                    echo '<li>';
-                    echo '<div uk-grid>
-                        <div class="uk-width-expand uk-text-small" style="color:#333">
-                            <a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-                        </div>
-                        <div class="uk-width-auto" style="color:#333">
-                            <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
-                        </div>
-                        <div class="uk-width-auto" style="color:#333">
-                            <a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&notFilter[]='.$field.':&quot;'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'&quot;" title="Ocultar">-</a>
-                        </div>';
-                    echo '</div></li>';                    
-                }
+
+                echo '<li>';
+                echo '<div uk-grid>
+                    <div class="uk-width-expand uk-text-small" style="color:#333">
+                        <a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
+                    </div>
+                    <div class="uk-width-auto" style="color:#333">
+                        <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
+                    </div>
+                    <div class="uk-width-auto" style="color:#333">
+                        <a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&notFilter[]='.$field.':&quot;'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'&quot;" title="Ocultar">-</a>
+                    </div>';
+                echo '</div></li>';  
+                
                 $i++;
 
                 

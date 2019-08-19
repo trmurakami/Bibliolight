@@ -56,6 +56,7 @@ if (isset($_REQUEST['delete'])) {
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
             </div>
             <div class="col-4">
+                <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>
                 <a class="btn btn-danger" href="node.php?delete=<?php echo $_GET['_id']; ?>" role="button">Excluir registro</a>
             </div>
         </div>

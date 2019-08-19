@@ -374,17 +374,6 @@ class Facets
 class UI {
    
     static function pagination($page, $total, $limit)
-
-//     <nav aria-label="Page navigation example">
-//     <ul class="pagination">
-//       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-//       <li class="page-item"><a class="page-link" href="#">1</a></li>
-//       <li class="page-item"><a class="page-link" href="#">2</a></li>
-//       <li class="page-item"><a class="page-link" href="#">3</a></li>
-//       <li class="page-item"><a class="page-link" href="#">Next</a></li>
-//     </ul>
-//   </nav>
-
     {
         echo '<nav aria-label="Page navigation example">';
         echo '<ul class="pagination">';
@@ -394,23 +383,8 @@ class UI {
             $_GET["page"] = $page-1 ;
             echo '<li class="page-item"><a class="page-link" href="'.http_build_query($_GET).'"> Anterior</a></li>';
         }
-        echo '</ul>';
-        echo '</div>';
-        echo '<div>';
-        echo '<p class="uk-text-center">Página '.number_format($page, 0, ',', '.') .'</p>';
-        echo '</div>';
-        echo '<div>';
-        echo '<p class="uk-text-center">'.number_format($total, 0, ',', '.') .'&nbsp;registros</p>';
-        echo '</div>';
-        //echo '<div>';
-        //if (isset($_GET["sort"])) {
-        //    echo '<a href="http://'.$_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'].'?'.str_replace('&sort='.$_GET["sort"].'', "", $_SERVER['QUERY_STRING']).'">'.$t->gettext('Ordenar por Data').'</a>';
-        //} else {
-        //    echo '<a href="http://'.$_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'].'?'.$_SERVER['QUERY_STRING'].'&sort=name.keyword">'.$t->gettext('Ordenar por Título').'</a>';
-        //}
-        //echo '</div>';
-        echo '<div>';
-        echo '<ul class="pagination">';
+        echo '<li class="page-item"><a class="page-link" href="#">Página '.number_format($page, 0, ',', '.') .'</a></li>';
+        echo '<li class="page-item"><a class="page-link" href="#">'.number_format($total, 0, ',', '.') .'&nbsp;registros</a></li>';
         if ($total/$limit > $page) {
             $_GET["page"] = $page+1;
             echo '<li class="page-item"><a class="page-link" href="http://'.$_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'].'?'.http_build_query($_GET).'"> Próxima</a></li>';

@@ -47,15 +47,23 @@ if (isset($_REQUEST['delete'])) {
     <?php require 'inc/navbar.php'; ?>
     <!-- /NAV -->
         
-    <div class="uk-container">
-        
-    <?php
-        print_r($cursor);
-    ?>
-    <br/><br/>    
-    <a class="btn btn-danger" href="node.php?delete=<?php echo $_GET['_id']; ?>" role="button">Excluir registro</a>
-
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h1><?php echo $cursor["_source"]["title"]; ?></h1>
+                <h5>ID: <?php echo $cursor["_id"]; ?></h5>
+                <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
+                <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-danger" href="node.php?delete=<?php echo $_GET['_id']; ?>" role="button">Excluir registro</a>
+            </div>
+        </div>
+        <br/><br/><br/><br/>            
+        <?php
+            print_r($cursor);
+        ?>
+        <br/><br/> 
                 
 
 </body>

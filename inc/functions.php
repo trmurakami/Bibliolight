@@ -218,7 +218,7 @@ class Requests
                 if (empty($getSearch)) {
                     $query["query"]["bool"]["must"]["query_string"]["query"] = "*";
                 } else {
-                    $getSearchClean = $antiXss->xss_clean($getSearch);
+                    $getSearchClean = filter_var($getSearch, FILTER_SANITIZE_STRIPPED);
                     if (preg_match_all('/"([^"]+)"/', $getSearchClean, $multipleWords)) {
                         //Result is storaged in $multipleWords
                     }

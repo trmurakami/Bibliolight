@@ -376,7 +376,7 @@ class UI {
     static function pagination($page, $total, $limit)
     {
         echo '<nav>';
-        echo '<ul class="pagination justify-content-center">';
+        echo '<ul class="pagination">';
         if ($page == 1) {
             echo '<li class="page-item disabled"><a class="page-link" href="#"> Anterior</a></li>';
         } else {

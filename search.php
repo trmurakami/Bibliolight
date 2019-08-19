@@ -97,6 +97,9 @@ if (isset($_GET["sort"])) {
                         
                     </div>
                 </div>
+                <!-- PAGINATION -->
+                <?php UI::pagination($page, $total, $limit); ?>
+                <!-- /PAGINATION --> 
             </div>
         </div>
     </body>

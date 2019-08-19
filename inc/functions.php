@@ -109,6 +109,7 @@ class Elasticsearch
             $params["index"] = $index;
         }
 
+        $params["type"] = $index;
         $params["id"] = $_id;
         $params["client"]["ignore"] = 404;
 

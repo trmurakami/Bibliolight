@@ -6,9 +6,18 @@
 require 'inc/config.php';
 require 'inc/functions.php';
 
+if (isset($_REQUEST['delete'])) {
+    $delete = Elasticsearch::delete($_REQUEST['delete'], null);
+    header('Location: index.php'); 
+} elseif (isset($_REQUEST['_id'])) {
+    $cursor = Elasticsearch::get($_REQUEST['_id'], null);
+} else {
+    echo "ID não encontrado";
+}
+
 
 /* QUERY */
-$cursor = Elasticsearch::get($_GET['_id'], null);
+
 
 ?>
 <!DOCTYPE html>
@@ -43,6 +52,8 @@ $cursor = Elasticsearch::get($_GET['_id'], null);
     <?php
         print_r($cursor);
     ?>
+    <br/><br/>    
+    <a class="btn btn-danger" href="node.php?delete=<?php echo $_GET['_id']; ?>" role="button">Excluir registro</a>
 
     </div>
                 

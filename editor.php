@@ -17,7 +17,7 @@ if (isset($_REQUEST["ID"])) {
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
     print_r($result);
     sleep(5); 
-    //echo '<script>window.location = \'search.php?filter[]=title:"'.$_POST["title"].'"\'</script>';
+    echo '<script>window.location = \'index.php\'</script>';
 } else {
     $uuid4 = Uuid::uuid4();
     $uuid = $uuid4->toString();

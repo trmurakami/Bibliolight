@@ -34,8 +34,7 @@
         </style>
 
     </head>
-    <body>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">    
+    <body>            
 
         <?php include 'inc/navbar.php'; ?>
 
@@ -64,7 +63,7 @@
                     <div class="col-6 col-md">
                     <h5>Estatísticas</h5>
                     <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="result.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
+                    <li><a class="text-muted" href="search.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
                     </ul>
                     </div>
                     <!--

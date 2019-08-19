@@ -60,7 +60,13 @@
       <div class="col-sm-10">
           <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Insira a editora">
       </div>
-    </div>      
+    </div>
+    <div class="form-group row">
+      <label for="date" class="col-sm-2 col-form-label">Data de publicação</label>
+      <div class="col-sm-10">
+          <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação">
+      </div>
+    </div>            
     <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
   </div>

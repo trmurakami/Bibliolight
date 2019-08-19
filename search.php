@@ -63,15 +63,17 @@ if (isset($_GET["sort"])) {
                     <div class="card mb-3">
                         <div class="row no-gutters">
                             <div class="col-md-3">
-                            <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                            <svg class="bd-placeholder-img" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
                             <!-- <img src="..." class="card-img" alt="Capa"> -->
                             </div>
                             <div class="col-md-9">
                             <div class="card-body">
                                 <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>
-                                <p class="card-text">Autores: SOBRENOME, Nome</p>
-                                <p class="card-text"><small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small></p>
-                                <p class="card-text"><small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small></p>
+                                <p class="card-text">
+                                    Autores: SOBRENOME, Nome<br/>
+                                    <small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>
+                                    <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small>
+                                </p>
                                 
                             </div>
                             </div>

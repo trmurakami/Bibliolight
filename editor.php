@@ -9,8 +9,8 @@
   if (isset($_REQUEST["ID"])) {
       //print_r($_REQUEST);
       $query["doc"]["title"] = $_REQUEST["title"];
-      //$query["doc"]["datePublished"] = $_POST["datePublished"];
       $query["doc"]["publisher"] = $_REQUEST["publisher"];
+      $query["doc"]["date"] = $_REQUEST["date"];
       $query["doc_as_upsert"] = true;
       print_r($query);
       $result = Elasticsearch::update($_REQUEST["ID"], $query);

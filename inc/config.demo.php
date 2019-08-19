@@ -16,7 +16,24 @@ $index = "works";
 /* Load libraries for PHP composer */ 
 require (__DIR__.'/../vendor/autoload.php'); 
 /* Load Elasticsearch Client */ 
-$client = \Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build(); 
 
+
+$client = \Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+
+/* Test if index exists */
+$indexParams['index']  = $index;   
+$testIndex = $client->indices()->exists($indexParams);
+if ($testIndex == false) {
+    $createIndexParams = [
+        'index' => $index,
+        'body' => [
+            'settings' => [
+                'number_of_shards' => 1,
+                'number_of_replicas' => 1
+            ]
+        ]
+    ];
+    $responseCreateIndex = $client->indices()->create($createIndexParams);
+}   
 
 ?>

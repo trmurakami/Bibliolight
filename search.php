@@ -68,7 +68,7 @@ if (isset($_GET["sort"])) {
                             </div>
                             <div class="col-md-9">
                             <div class="card-body">
-                                <h5 class="card-title">'.$r["_source"]["title"].'</h5>
+                                <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>
                                 <p class="card-text">Autores: SOBRENOME, Nome</p>
                                 <p class="card-text"><small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small></p>
                                 <p class="card-text"><small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small></p>

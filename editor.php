@@ -1,26 +1,27 @@
 <?php
-  require 'inc/config.php';
-  require 'inc/functions.php';
 
-  use Ramsey\Uuid\Uuid;
-  use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+    require 'inc/config.php';
+    require 'inc/functions.php';
+
+    use Ramsey\Uuid\Uuid;
+    use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 
-  if (isset($_REQUEST["ID"])) {
-      //print_r($_REQUEST);
-      $query["doc"]["title"] = $_REQUEST["title"];
-      $query["doc"]["publisher"] = $_REQUEST["publisher"];
-      $query["doc"]["date"] = $_REQUEST["date"];
-      $query["doc_as_upsert"] = true;
-      print_r($query);
-      $result = Elasticsearch::update($_REQUEST["ID"], $query);
-      print_r($result);
-      sleep(5); 
-      //echo '<script>window.location = \'search.php?filter[]=title:"'.$_POST["title"].'"\'</script>';
-  } else {
+if (isset($_REQUEST["ID"])) {
+    //print_r($_REQUEST);
+    $query["doc"]["title"] = $_REQUEST["title"];
+    $query["doc"]["publisher"] = $_REQUEST["publisher"];
+    $query["doc"]["date"] = $_REQUEST["date"];
+    $query["doc_as_upsert"] = true;
+    print_r($query);
+    $result = Elasticsearch::update($_REQUEST["ID"], $query);
+    print_r($result);
+    sleep(5); 
+    //echo '<script>window.location = \'search.php?filter[]=title:"'.$_POST["title"].'"\'</script>';
+} else {
     $uuid4 = Uuid::uuid4();
     $uuid = $uuid4->toString();
-  }
+}
 
 ?>
 <!doctype html>

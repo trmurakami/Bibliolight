@@ -49,9 +49,15 @@
 
     </head>
     <body>
-        <br/><br/><br/><br/><br/><br/>
+        <?php include 'inc/navbar.php'; ?>
+        <br/><br/><br/><br/><br/><br/>        
         <div class="container">
+            <!-- PAGINATION -->
+            <?php UI::pagination($page, $total, $limit); ?>
+            <!-- /PAGINATION --> 
+
             <div class="row mb-3">
+
                 <div class="col-12 col-md-8 themed-grid-col">
                 <?php
                     foreach ($cursor["hits"]["hits"] as $r) {

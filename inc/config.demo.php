@@ -12,7 +12,7 @@ $instituicao = "";
 /* Endereço do server, sem http:// */ 
 $hosts = ['localhost'];
 /* Configurações do Elasticsearch */
-$index = "works";
+$index = "bibliolight";
 /* Load libraries for PHP composer */ 
 require (__DIR__.'/../vendor/autoload.php'); 
 /* Load Elasticsearch Client */ 

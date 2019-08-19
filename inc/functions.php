@@ -413,7 +413,7 @@ Class Homepage
         }
         '; 
         $response = Elasticsearch::search(null, 0, $body);
-        return $response["hits"]["total"];
+        return $response["hits"]["total"]["value"];
 
     }    
 

@@ -62,7 +62,7 @@ if (isset($_REQUEST['delete'])) {
         </div>
         <br/><br/><br/><br/>            
         <?php
-            print_r($cursor);
+            //print_r($cursor);
         ?>
         <br/><br/> 
                 

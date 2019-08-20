@@ -62,10 +62,17 @@ if (isset($_GET["sort"])) {
                     echo '
                     <div class="card mb-3">
                         <div class="row no-gutters">
-                            <div class="col-md-2">
-                            <svg class="bd-placeholder-img" width="100%" height="170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-                            <!-- <img src="..." class="card-img" alt="Capa"> -->
-                            </div>
+                            <div class="col-md-2">';
+
+                            if (!empty($r["_source"]["isbn"])) {
+                                $cover_link = 'https://covers.openlibrary.org/b/isbn/'.$r["_source"]["isbn"].'-M.jpg';
+                                echo  '<img src="'.$cover_link.'" class="card-img" alt="Capa">';
+                            } else {
+                                echo '<svg class="bd-placeholder-img" width="100%" height="170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                                <!-- <img src="..." class="card-img" alt="Capa"> -->';
+                            }
+
+                    echo '</div>
                             <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>

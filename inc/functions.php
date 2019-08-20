@@ -218,22 +218,11 @@ class Requests
                 if (empty($getSearch)) {
                     $query["query"]["bool"]["must"]["query_string"]["query"] = "*";
                 } else {
-                    $getSearchClean = filter_var($getSearch, FILTER_SANITIZE_STRIPPED);
-                    if (preg_match_all('/"([^"]+)"/', $getSearchClean, $multipleWords)) {
-                        //Result is storaged in $multipleWords
-                    }
-                    $queryRest = preg_replace('/"([^"]+)"/', "", $getSearchClean);
-                    $parsedRest = explode(' ', $queryRest);
-                    $resultSearchTerms = array_merge($multipleWords[1], $parsedRest);
-                    $resultSearchTerms = array_filter($resultSearchTerms);
-                    $resultSearchTermsComplete = array_merge($resultSearchTermsComplete, $resultSearchTerms);
-                    $getSearchResult = implode("\) AND \(", $resultSearchTermsComplete);
-                    $query["query"]["bool"]["must"]["query_string"]["query"] = "\($getSearchResult\)";
-                }
+                    $query["query"]["bool"]["must"]["query_string"]["query"] = "$getSearch";
+                } 
             }
 
-
-        } 
+        }
 
         if (!empty($get['range'])) {
             $query["query"]["bool"]["must"]["query_string"]["query"] = $get['range'][0];
@@ -244,8 +233,8 @@ class Requests
         }
 
         //$query["query"]["bool"]["must"]["query_string"]["default_operator"] = "AND";
-        $query["query"]["bool"]["must"]["query_string"]["analyzer"] = "portuguese";
-        $query["query"]["bool"]["must"]["query_string"]["phrase_slop"] = 10;
+        //$query["query"]["bool"]["must"]["query_string"]["analyzer"] = "portuguese";
+        //$query["query"]["bool"]["must"]["query_string"]["phrase_slop"] = 10;
         
         return compact('page', 'query', 'limit', 'skip');
     }
@@ -413,7 +402,7 @@ Class Homepage
         }
         '; 
         $response = Elasticsearch::search(null, 0, $body);
-        return $response["hits"]["total"];
+        return $response["hits"]["total"]["value"];
 
     }    
 

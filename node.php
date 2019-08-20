@@ -52,8 +52,10 @@ if (isset($_REQUEST['delete'])) {
             <div class="col-8">
                 <h1><?php echo $cursor["_source"]["title"]; ?></h1>
                 <h5>ID: <?php echo $cursor["_id"]; ?></h5>
+                <h5>Autor: <?php echo $cursor["_source"]["contributor"][0]; ?></h5>
                 <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
+                <h5>ISBN: <?php echo $cursor["_source"]["isbn"]; ?></h5>
             </div>
             <div class="col-4">
                 <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>

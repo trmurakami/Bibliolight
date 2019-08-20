@@ -10,8 +10,10 @@
 if (isset($_REQUEST["ID"])) {
     //print_r($_REQUEST);
     $query["doc"]["title"] = $_REQUEST["title"];
+    $query["doc"]["contributor"] = $_REQUEST["contributor"];
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
+    $query["doc"]["isbn"] = $_REQUEST["isbn"];
     $query["doc_as_upsert"] = true;
     print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
@@ -59,17 +61,26 @@ if (isset($_REQUEST["ID"])) {
       </div>
     </div>
     <div class="form-group row">
-      <label for="publisher" class="col-sm-2 col-form-label">Editora</label>
-      <div class="col-sm-10">
+      <label for="contributor" class="col-sm-2 col-form-label">Autor</label>
+      <div class="col-10">
+          <input type="text" class="form-control" id="contributor" name="contributor[]" placeholder="Insira o autor no formato (SOBRENOME, Nome)">
+      </div>
+    </div>    
+    <div class="form-group row">
+      <label for="publisher" class="col-sm-2 col-form-label">Imprenta</label>
+      <div class="col-7">
           <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Insira a editora">
+      </div>
+      <div class="col">
+          <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação">
       </div>
     </div>
     <div class="form-group row">
-      <label for="date" class="col-sm-2 col-form-label">Data de publicação</label>
+      <label for="date" class="col-sm-2 col-form-label">ISBN</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação">
+          <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Insira o ISBN (Somente os números)">
       </div>
-    </div>            
+    </div>              
     <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
   </div>

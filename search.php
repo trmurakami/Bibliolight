@@ -62,17 +62,18 @@ if (isset($_GET["sort"])) {
                     echo '
                     <div class="card mb-3">
                         <div class="row no-gutters">
-                            <div class="col-md-3">
-                            <svg class="bd-placeholder-img" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                            <div class="col-md-2">
+                            <svg class="bd-placeholder-img" width="100%" height="170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
                             <!-- <img src="..." class="card-img" alt="Capa"> -->
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>
                                 <p class="card-text">
-                                    Autores: SOBRENOME, Nome<br/>
+                                    <small class="text-muted">Autor: '.$r["_source"]["contributor"][0].'</small><br/>
                                     <small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>
-                                    <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small>
+                                    <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>
+                                    <small class="text-muted">ISBN: '.$r["_source"]["isbn"].'</small>
                                 </p>
                                 
                             </div>
@@ -93,6 +94,7 @@ if (isset($_GET["sort"])) {
                         if (!isset($_GET["search"])) {
                             $_GET["search"] = null;
                         }
+                            $facets->facet("contributor", 10, "Autores", null, "_term", $_GET["search"], true);
                             $facets->facet("publisher", 10, "Editora", null, "_term", $_GET["search"], true);
                             $facets->facet("date", 10, "Data de publicação", null, "_term", $_GET["search"], true);
                         ?>

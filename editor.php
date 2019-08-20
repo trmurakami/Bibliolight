@@ -33,8 +33,47 @@ if (isset($_REQUEST["ID"])) {
 if (isset($_REQUEST["_id"])) {
   $elasticsearch = new Elasticsearch();
   $cursor = $elasticsearch->get($_REQUEST["_id"], null);
-  print_r($cursor);
+  //print_r($cursor);
+
+  if (isset($cursor["_source"]["title"])) {
+    $titleValue = $cursor["_source"]["title"];
+  } else {
+    $titleValue = "";
+  }
+
+  if (isset($cursor["_source"]["contributor"])) {
+    $contributorValue = $cursor["_source"]["contributor"][0];
+  } else {
+    $contributorValue = "";
+  }  
+
+  if (isset($cursor["_source"]["publisher"])) {
+    $publisherValue = $cursor["_source"]["publisher"];
+  } else {
+    $publisherValue = "";
+  }
+
+  if (isset($cursor["_source"]["date"])) {
+    $dateValue = $cursor["_source"]["date"];
+  } else {
+    $dateValue = "";
+  }  
+
+  if (isset($cursor["_source"]["identifier"])) {
+    $isbnValue = $cursor["_source"]["identifier"][0]["value"];
+  } else {
+    $isbnValue = "";
+  }  
+
+} else {
+    $titleValue = "";
+    $contributorValue = "";
+    $publisherValue = "";
+    $dateValue = "";
+    $isbnValue = "";
 }
+
+
 
 
 ?>
@@ -69,28 +108,28 @@ if (isset($_REQUEST["_id"])) {
     <div class="form-group row">
       <label for="title" class="col-sm-2 col-form-label">Título</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" id="title" name="title" placeholder="Insira o título">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Insira o título" value="<?php echo $titleValue; ?>">
       </div>
     </div>
     <div class="form-group row">
       <label for="contributor" class="col-sm-2 col-form-label">Autor</label>
       <div class="col-10">
-          <input type="text" class="form-control" id="contributor" name="contributor[]" placeholder="Insira o autor no formato (SOBRENOME, Nome)">
+          <input type="text" class="form-control" id="contributor" name="contributor[]" placeholder="Insira o autor no formato (SOBRENOME, Nome)" value="<?php echo $contributorValue; ?>">
       </div>
     </div>    
     <div class="form-group row">
       <label for="publisher" class="col-sm-2 col-form-label">Imprenta</label>
       <div class="col-7">
-          <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Insira a editora">
+          <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Insira a editora" value="<?php echo $publisherValue; ?>">
       </div>
       <div class="col">
-          <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação" pattern="\d\d\d\d">
+          <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação" pattern="\d\d\d\d" value="<?php echo $dateValue; ?>">
       </div>
     </div>
     <div class="form-group row">
       <label for="date" class="col-sm-2 col-form-label">ISBN</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Insira o ISBN (Somente os números)" pattern="\d*">
+          <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Insira o ISBN (Somente os números)" pattern="\d*" value="<?php echo $isbnValue; ?>">
       </div>
     </div>              
     <button type="submit" class="btn btn-primary">Salvar</button>

@@ -48,6 +48,7 @@
             <label for="searchHelp">Pesquisar</label>
             <input type="text" class="form-control" id="search" name="search[]" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
             <small id="searchHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
+            <small id="searchHelp" class="form-text text-muted">Para pesquisar por parte de uma palavra, digite a parte com asterisco. Ex.: biblio*</small>
             </div>
             <button type="submit" class="btn btn-primary">Pesquisar</button>
             </form>

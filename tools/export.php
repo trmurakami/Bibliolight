@@ -1,0 +1,256 @@
+<?php
+
+if (isset($_GET["format"])) {
+
+    if ($_GET["format"] == "table") {
+
+        $file = "export_bdpi.tsv";
+        header('Content-type: text/tab-separated-values; charset=utf-8');
+        header("Content-Disposition: attachment; filename=$file");
+
+        // Set directory to ROOT
+        chdir('../');
+        // Include essencial files
+        include 'inc/config.php';
+        include 'inc/functions.php';
+
+        if (!empty($_GET)) {
+            $result_get = Requests::getParser($_GET);
+            $query = $result_get['query'];
+            $limit = $result_get['limit'];
+            $page = $result_get['page'];
+            $skip = $result_get['skip'];
+
+            if (isset($_GET["sort"])) {
+                $query['sort'] = [
+                    ['title.keyword' => ['order' => 'asc']],
+                ];
+            } else {
+                $query['sort'] = [
+                    ['date.keyword' => ['order' => 'desc']],
+                ];
+            }
+
+            $params = [];
+            $params["index"] = $index;
+            $params["type"] = $index;
+            $params["size"] = 50;
+            $params["scroll"] = "30s";
+            $params["body"] = $query;
+
+            $cursor = $client->search($params);
+            $total = $cursor["hits"]["total"];
+
+            $content[] = "ID\tTítulo\tEditora\tAno de publicação";
+
+            foreach ($cursor["hits"]["hits"] as $r) {
+                unset($fields);
+
+                $fields[] = $r["_id"];
+
+                $fields[] = $r["_source"]["title"];
+
+                if (!empty($r["_source"]["publisher"])) {
+                    $fields[] = $r["_source"]["publisher"];
+                } else {
+                    $fields[] = "";
+                }
+                
+                if (!empty($r["_source"]['date'])) {
+                    $fields[] = $r["_source"]['date'];
+                } else {
+                    $fields[] = "";
+                }                
+
+                // foreach ($r["_source"]['author'] as $authors) {
+                //     if (!empty($authors["person"]["potentialAction"])) {
+                //       $authors_array[]= ''.$authors["person"]["name"].' ('.$authors["person"]["potentialAction"].')';
+                //     } else {
+                //       $authors_array[]= $authors["person"]["name"];
+                //     }
+                // }
+                // $fields[] = implode(";", $authors_array);
+                // unset($authors_array);       
+
+
+                $content[] = implode("\t", $fields);
+                unset($fields);
+
+
+            }
+
+
+            while (isset($cursor['hits']['hits']) && count($cursor['hits']['hits']) > 0) {
+                $scroll_id = $cursor['_scroll_id'];
+                $cursor = $client->scroll(
+                    [
+                    "scroll_id" => $scroll_id,
+                    "scroll" => "30s"
+                    ]
+                );
+
+                foreach ($cursor["hits"]["hits"] as $r) {
+                    unset($fields);
+
+                    $fields[] = $r["_id"];
+
+                    $fields[] = $r["_source"]["title"];
+    
+                    if (!empty($r["_source"]["publisher"])) {
+                        $fields[] = $r["_source"]["publisher"];
+                    } else {
+                        $fields[] = "";
+                    }
+                    
+                    if (!empty($r["_source"]['date'])) {
+                        $fields[] = $r["_source"]['date'];
+                    } else {
+                        $fields[] = "";
+                    }                
+    
+                    // foreach ($r["_source"]['author'] as $authors) {
+                    //     if (!empty($authors["person"]["potentialAction"])) {
+                    //       $authors_array[]= ''.$authors["person"]["name"].' ('.$authors["person"]["potentialAction"].')';
+                    //     } else {
+                    //       $authors_array[]= $authors["person"]["name"];
+                    //     }
+                    // }
+                    // $fields[] = implode(";", $authors_array);
+                    // unset($authors_array); 
+
+                    $content[] = implode("\t", $fields);
+                    unset($fields);
+
+
+                }
+            }
+            echo implode("\n", $content);
+
+        }
+
+    } elseif ($_GET["format"] == "ris") {
+
+        $file="export_bdpi.ris";
+        header('Content-type: application/x-research-info-systems');
+        header("Content-Disposition: attachment; filename=$file");
+
+        // Set directory to ROOT
+        chdir('../');
+        // Include essencial files
+        include 'inc/config.php';
+
+
+        $result_get = Requests::getParser($_GET);
+        $query = $result_get['query'];
+        $limit = $result_get['limit'];
+        $page = $result_get['page'];
+        $skip = $result_get['skip'];
+
+        if (isset($_GET["sort"])) {
+            $query['sort'] = [
+                ['name.keyword' => ['order' => 'asc']],
+            ];
+        } else {
+            $query['sort'] = [
+                ['datePublished.keyword' => ['order' => 'desc']],
+            ];
+        }
+
+        $params = [];
+        $params["index"] = $index;
+        $params["type"] = $type;
+        $params["size"] = 50;
+        $params["scroll"] = "30s";
+        $params["body"] = $query;
+
+        $cursor = $client->search($params);
+        foreach ($cursor["hits"]["hits"] as $r) {
+            /* Exportador RIS */
+            $record_blob[] = Exporters::RIS($r);
+        }
+
+        while (isset($cursor['hits']['hits']) && count($cursor['hits']['hits']) > 0) {
+            $scroll_id = $cursor['_scroll_id'];
+            $cursor = $client->scroll(
+                [
+                "scroll_id" => $scroll_id,
+                "scroll" => "30s"
+                ]
+            );
+
+            foreach ($cursor["hits"]["hits"] as $r) {
+                /* Exportador RIS */
+                $record_blob[] = Exporters::RIS($r);
+            }
+        }
+        foreach ($record_blob as $record) {
+            $record_array = explode('\n', $record);
+            echo implode("\n", $record_array);
+        }
+
+    } elseif ($_GET["format"] == "bibtex") {
+
+        $file="export_bdpi.bib";
+        header('Content-type: text/plain');
+        header("Content-Disposition: attachment; filename=$file");
+
+        // Set directory to ROOT
+        chdir('../');
+        // Include essencial files
+        include 'inc/config.php';
+
+
+        $result_get = Requests::getParser($_GET);
+        $query = $result_get['query'];
+        $limit = $result_get['limit'];
+        $page = $result_get['page'];
+        $skip = $result_get['skip'];
+
+        if (isset($_GET["sort"])) {
+            $query['sort'] = [
+                ['name.keyword' => ['order' => 'asc']],
+            ];
+        } else {
+            $query['sort'] = [
+                ['datePublished.keyword' => ['order' => 'desc']],
+            ];
+        }
+
+        $params = [];
+        $params["index"] = $index;
+        $params["type"] = $type;
+        $params["size"] = 50;
+        $params["scroll"] = "30s";
+        $params["body"] = $query;
+
+        $cursor = $client->search($params);
+        foreach ($cursor["hits"]["hits"] as $r) {
+            /* Exportador RIS */
+            $record_blob[] = Exporters::bibtex($r);
+        }
+
+        while (isset($cursor['hits']['hits']) && count($cursor['hits']['hits']) > 0) {
+            $scroll_id = $cursor['_scroll_id'];
+            $cursor = $client->scroll(
+                [
+                "scroll_id" => $scroll_id,
+                "scroll" => "30s"
+                ]
+            );
+
+            foreach ($cursor["hits"]["hits"] as $r) {
+                /* Exportador RIS */
+                $record_blob[] = Exporters::bibtex($r);
+            }
+        }
+
+        foreach ($record_blob as $record) {
+            $record_array = explode('\n', $record);
+            echo "\n";
+            echo "\n";
+            echo implode("\n", $record_array);
+        }
+    } else {
+        echo "Formato não definido";
+    }}
+?>

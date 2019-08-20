@@ -40,7 +40,9 @@ if (isset($_REQUEST["ID"])) {
 
   </head>
   <body>
+  <?php include 'inc/navbar.php'; ?>
   <div class="container">
+    
     <h1>Editor</h1>
 
     <form action="editor.php" method="post">

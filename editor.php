@@ -20,8 +20,8 @@ if (isset($_REQUEST["ID"])) {
     $query["doc_as_upsert"] = true;
     print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
-    print_r($result);
-    sleep(5); 
+    //print_r($result);
+    sleep(2); 
     echo '<script>window.location = \'index.php\'</script>';
 } else {
     $uuid4 = Uuid::uuid4();

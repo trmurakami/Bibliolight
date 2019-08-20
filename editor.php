@@ -13,7 +13,10 @@ if (isset($_REQUEST["ID"])) {
     $query["doc"]["contributor"] = $_REQUEST["contributor"];
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
-    $query["doc"]["isbn"] = $_REQUEST["isbn"];
+    if (!empty($_REQUEST["isbn"])) {
+        $query["doc"]["identifier"][0]["value"] = $_REQUEST["isbn"];
+        $query["doc"]["identifier"][0]["type"] = "ISBN";
+    }
     $query["doc_as_upsert"] = true;
     print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);

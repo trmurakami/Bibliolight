@@ -56,14 +56,14 @@ if (isset($_GET["format"])) {
                     $fields[] = "";
                 }
                 
-                if (!empty($r["_source"]['date'])) {
-                    $fields[] = $r["_source"]['date'];
+                if (!empty($r["_source"]["date"])) {
+                    $fields[] = $r["_source"]["date"];
                 } else {
                     $fields[] = "";
                 }
 
-                if (!empty($r["_source"]['isbn'])) {
-                    $fields[] = $r["_source"]['isbn'];
+                if (!empty($r["_source"]["identifier"])) {
+                    $fields[] = $r["_source"]["identifier"][0]["value"];
                 } else {
                     $fields[] = "";
                 }   

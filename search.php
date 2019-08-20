@@ -80,7 +80,7 @@ if (isset($_GET["sort"])) {
                                     <small class="text-muted">Autor: '.$r["_source"]["contributor"][0].'</small><br/>
                                     <small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>
                                     <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>
-                                    <small class="text-muted">ISBN: '.$r["_source"]["isbn"].'</small>
+                                    <small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small>
                                 </p>
                                 
                             </div>

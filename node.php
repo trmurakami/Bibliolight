@@ -55,7 +55,7 @@ if (isset($_REQUEST['delete'])) {
                 <h5>Autor: <?php echo $cursor["_source"]["contributor"][0]; ?></h5>
                 <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
-                <h5>ISBN: <?php echo $cursor["_source"]["isbn"]; ?></h5>
+                <h5>ISBN: <?php echo $cursor["_source"]["identifier"][0]["value"]; ?></h5>
             </div>
             <div class="col-4">
                 <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>

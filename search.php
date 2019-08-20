@@ -64,8 +64,8 @@ if (isset($_GET["sort"])) {
                         <div class="row no-gutters">
                             <div class="col-md-2">';
 
-                            if (!empty($r["_source"]["isbn"])) {
-                                $cover_link = 'https://covers.openlibrary.org/b/isbn/'.$r["_source"]["isbn"].'-M.jpg';
+                            if (!empty($r["_source"]["identifier"])) {
+                                $cover_link = 'https://covers.openlibrary.org/b/isbn/'.$r["_source"]["identifier"][0]["value"].'-M.jpg';
                                 echo  '<img src="'.$cover_link.'" class="card-img" alt="Capa">';
                             } else {
                                 echo '<svg class="bd-placeholder-img" width="100%" height="170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>

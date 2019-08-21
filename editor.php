@@ -31,39 +31,40 @@ if (isset($_REQUEST["ID"])) {
 
 /* Define variables */
 if (isset($_REQUEST["_id"])) {
-  $elasticsearch = new Elasticsearch();
-  $cursor = $elasticsearch->get($_REQUEST["_id"], null);
-  //print_r($cursor);
+    $uuid = $_REQUEST["_id"];
+    $elasticsearch = new Elasticsearch();
+    $cursor = $elasticsearch->get($_REQUEST["_id"], null);
+    //print_r($cursor);
 
-  if (isset($cursor["_source"]["title"])) {
+    if (isset($cursor["_source"]["title"])) {
     $titleValue = $cursor["_source"]["title"];
-  } else {
+    } else {
     $titleValue = "";
-  }
+    }
 
-  if (isset($cursor["_source"]["contributor"])) {
+    if (isset($cursor["_source"]["contributor"])) {
     $contributorValue = $cursor["_source"]["contributor"][0];
-  } else {
+    } else {
     $contributorValue = "";
-  }  
+    }  
 
-  if (isset($cursor["_source"]["publisher"])) {
+    if (isset($cursor["_source"]["publisher"])) {
     $publisherValue = $cursor["_source"]["publisher"];
-  } else {
+    } else {
     $publisherValue = "";
-  }
+    }
 
-  if (isset($cursor["_source"]["date"])) {
+    if (isset($cursor["_source"]["date"])) {
     $dateValue = $cursor["_source"]["date"];
-  } else {
+    } else {
     $dateValue = "";
-  }  
+    }  
 
-  if (isset($cursor["_source"]["identifier"])) {
+    if (isset($cursor["_source"]["identifier"])) {
     $isbnValue = $cursor["_source"]["identifier"][0]["value"];
-  } else {
+    } else {
     $isbnValue = "";
-  }  
+    }  
 
 } else {
     $titleValue = "";

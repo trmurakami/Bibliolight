@@ -41,7 +41,7 @@ if (isset($_GET["format"])) {
             $cursor = $client->search($params);
             $total = $cursor["hits"]["total"];
 
-            $content[] = "ID\tTítulo\tEditora\tAno de publicação\tISBN";
+            $content[] = "ID\tTítulo\tAutor\tEditora\tAno de publicação\tISBN";
 
             foreach ($cursor["hits"]["hits"] as $r) {
                 unset($fields);
@@ -49,6 +49,12 @@ if (isset($_GET["format"])) {
                 $fields[] = $r["_id"];
 
                 $fields[] = $r["_source"]["title"];
+
+                if (!empty($r["_source"]["contributor"])) {
+                    $fields[] = $r["_source"]["contributor"][0];
+                } else {
+                    $fields[] = "";
+                }                
 
                 if (!empty($r["_source"]["publisher"])) {
                     $fields[] = $r["_source"]["publisher"];

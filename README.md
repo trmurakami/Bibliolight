@@ -13,10 +13,10 @@ Elasticsearch > 7.2
 
 ## Instalação no Linux
 
-'''
+```
 curl -s http://getcomposer.org/installer | php
 php composer.phar install --no-dev
-'''
+```
 
 
 

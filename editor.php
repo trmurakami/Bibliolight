@@ -10,13 +10,18 @@
 if (isset($_REQUEST["ID"])) {
     //print_r($_REQUEST);
     $query["doc"]["title"] = $_REQUEST["title"];
-    $query["doc"]["contributor"] = $_REQUEST["contributor"];
+    if (!empty($_REQUEST["contributor"])) {
+        $query["doc"]["contributor"] = explode(";", $_REQUEST["contributor"]);
+    }
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
     if (!empty($_REQUEST["isbn"])) {
         $query["doc"]["identifier"][0]["value"] = $_REQUEST["isbn"];
         $query["doc"]["identifier"][0]["type"] = "ISBN";
     }
+    if (!empty($_REQUEST["subjects"])) {
+        $query["doc"]["subjects"] = explode(";", $_REQUEST["subjects"]);
+    } 
     $query["doc_as_upsert"] = true;
     print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
@@ -37,34 +42,40 @@ if (isset($_REQUEST["_id"])) {
     //print_r($cursor);
 
     if (isset($cursor["_source"]["title"])) {
-    $titleValue = $cursor["_source"]["title"];
+        $titleValue = $cursor["_source"]["title"];
     } else {
-    $titleValue = "";
+        $titleValue = "";
     }
 
     if (isset($cursor["_source"]["contributor"])) {
-    $contributorValue = $cursor["_source"]["contributor"][0];
+        $contributorValue = implode(";", $cursor["_source"]["contributor"]);
     } else {
-    $contributorValue = "";
+        $contributorValue = "";
     }  
 
     if (isset($cursor["_source"]["publisher"])) {
-    $publisherValue = $cursor["_source"]["publisher"];
+        $publisherValue = $cursor["_source"]["publisher"];
     } else {
-    $publisherValue = "";
+        $publisherValue = "";
     }
 
     if (isset($cursor["_source"]["date"])) {
-    $dateValue = $cursor["_source"]["date"];
+        $dateValue = $cursor["_source"]["date"];
     } else {
-    $dateValue = "";
+        $dateValue = "";
     }  
 
     if (isset($cursor["_source"]["identifier"])) {
-    $isbnValue = $cursor["_source"]["identifier"][0]["value"];
+        $isbnValue = $cursor["_source"]["identifier"][0]["value"];
     } else {
-    $isbnValue = "";
-    }  
+        $isbnValue = "";
+    }
+    
+    if (isset($cursor["_source"]["subjects"])) {
+        $subjectsValue = implode(";", $cursor["_source"]["subjects"]);
+    } else {
+        $subjectsValue = "";
+    }     
 
 } else {
     $titleValue = "";
@@ -72,6 +83,7 @@ if (isset($_REQUEST["_id"])) {
     $publisherValue = "";
     $dateValue = "";
     $isbnValue = "";
+    $subjectsValue = "";
 }
 
 
@@ -115,7 +127,7 @@ if (isset($_REQUEST["_id"])) {
     <div class="form-group row">
       <label for="contributor" class="col-sm-2 col-form-label">Autor</label>
       <div class="col-10">
-          <input type="text" class="form-control" id="contributor" name="contributor[]" placeholder="Insira o autor no formato (SOBRENOME, Nome)" value="<?php echo $contributorValue; ?>">
+          <input type="text" class="form-control" id="contributor" name="contributor" placeholder="Insira o autor no formato (SOBRENOME, Nome), caso tenha mais de um autor, separe por ponto e vírgula" value="<?php echo $contributorValue; ?>">
       </div>
     </div>    
     <div class="form-group row">
@@ -132,7 +144,13 @@ if (isset($_REQUEST["_id"])) {
       <div class="col-sm-10">
           <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Insira o ISBN (Somente os números)" pattern="\d*" value="<?php echo $isbnValue; ?>">
       </div>
-    </div>              
+    </div>
+    <div class="form-group row">
+      <label for="date" class="col-sm-2 col-form-label">Assuntos</label>
+      <div class="col-sm-10">
+          <input type="text" class="form-control" id="subjects" name="subjects" placeholder="Insira os assuntos (separados por ponto e vírgula ;)"  value="<?php echo $subjectsValue; ?>">
+      </div>
+    </div>                      
     <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
   </div>

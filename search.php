@@ -77,7 +77,7 @@ if (isset($_GET["sort"])) {
                             <div class="card-body">
                                 <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>
                                 <p class="card-text">
-                                    <small class="text-muted">Autor: '.$r["_source"]["contributor"][0].'</small><br/>
+                                    <small class="text-muted">Autor(es): '.implode(";", $r["_source"]["contributor"]).'</small><br/>
                                     <small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>
                                     <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>
                                     <small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small>
@@ -104,6 +104,7 @@ if (isset($_GET["sort"])) {
                             $facets->facet("contributor", 10, "Autores", null, "_term", $_GET["search"], true);
                             $facets->facet("publisher", 10, "Editora", null, "_term", $_GET["search"], true);
                             $facets->facet("date", 10, "Data de publicação", "desc", "_term", $_GET["search"], true);
+                            $facets->facet("subjects", 10, "Assuntos", null, "_term", $_GET["search"], true);
                         ?>
                         
                     </div>

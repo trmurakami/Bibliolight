@@ -18,8 +18,14 @@ curl -s http://getcomposer.org/installer | php
 php composer.phar install --no-dev
 ```
 
+Copiar o arquivo inc/config.demo.php para inc/config.php
 
+```
+cd inc/
+cp config.demo.php config.php
+```
 
+Editar o arquivo config.php
 
 ## Instalação no Windows
 

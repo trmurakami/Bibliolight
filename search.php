@@ -103,7 +103,7 @@ if (isset($_GET["sort"])) {
                         }
                             $facets->facet("contributor", 10, "Autores", null, "_term", $_GET["search"], true);
                             $facets->facet("publisher", 10, "Editora", null, "_term", $_GET["search"], true);
-                            $facets->facet("date", 10, "Data de publicação", null, "_term", $_GET["search"], true);
+                            $facets->facet("date", 10, "Data de publicação", "desc", "_term", $_GET["search"], true);
                         ?>
                         
                     </div>

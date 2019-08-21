@@ -20,6 +20,8 @@ if (isset($_REQUEST["isbn"])) {
             $dateValue = $record_isbn["items"][0]["volumeInfo"]["publishedDate"];
         }
         $isbnValue = $_REQUEST["isbn"];
+    } else {
+        $alert = '<div class="alert alert-danger" role="alert">ISBN não encontrado no Google Books</div>';
     }
     //print_r($record_isbn);
 }
@@ -137,6 +139,8 @@ if (!isset($subjectsValue)) {
   <div class="container">
     
     <h1>Editor</h1>
+
+    <?php (isset($alert)? print_r($alert) : print_r("")); ?>
 
     <form action="editor.php" method="post">
     <div class="form-group row">

@@ -6,6 +6,27 @@
     use Ramsey\Uuid\Uuid;
     use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
+if (isset($_FILES['cover']['name'])) {
+    if (($_FILES['cover']['name']!="")){
+        // Where the file is going to be stored
+        $target_dir = "covers/";
+        $file = $_FILES['cover']['name'];
+        $path = pathinfo($file);
+        $filename = $path['filename'];
+        $ext = $path['extension'];
+        $temp_name = $_FILES['cover']['tmp_name'];
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+        
+        // Check if file already exists
+        if (file_exists($path_filename_ext)) {
+            $alert = '<div class="alert alert-danger" role="alert">Desculpe, arquivo já existe.</div>';
+        } else {
+            move_uploaded_file($temp_name,$path_filename_ext);
+            $alert = '<div class="alert alert-success" role="alert">Parabéns! Arquivo carregado com sucesso.</div>';
+        }
+    }
+}    
+
 if (isset($_REQUEST["isbn"])) {
     $url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_REQUEST["isbn"].'';
     $json_isbn = file_get_contents($url_isbn);
@@ -46,7 +67,7 @@ if (isset($_REQUEST["ID"])) {
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
     //print_r($result);
     sleep(2); 
-    echo '<script>window.location = \'index.php\'</script>';
+    //echo '<script>window.location = \'index.php\'</script>';
 } else {
     $uuid4 = Uuid::uuid4();
     $uuid = $uuid4->toString();
@@ -142,7 +163,7 @@ if (!isset($subjectsValue)) {
 
     <?php (isset($alert)? print_r($alert) : print_r("")); ?>
 
-    <form action="editor.php" method="post">
+    <form action="editor.php" method="post" enctype="multipart/form-data">
     <div class="form-group row">
       <label for="ID" class="col-sm-2 col-form-label">ID</label>
       <div class="col-sm-10">
@@ -181,10 +202,28 @@ if (!isset($subjectsValue)) {
       <div class="col-sm-10">
           <input type="text" class="form-control" id="subjects" name="subjects" placeholder="Insira os assuntos (separados por ponto e vírgula ;)"  value="<?php echo $subjectsValue; ?>">
       </div>
-    </div>                      
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="cover">
+        <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente com nome usando o mesmo ISBN e jpg. Ex: 9788585637323.jpg)</label>
+    </div>
+    <br/><br/>              
     <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
   </div>
+
+  <script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>           
+
 
   </body>
 </html>

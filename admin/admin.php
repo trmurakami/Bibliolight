@@ -1,4 +1,10 @@
-<?php 
+<?php
+
+if (!file_exists('../covers/')) {
+    mkdir('../covers', 0755, true);
+}
+
+
 if (isset($_GET["delete"])) {
     if ($_GET["delete"] == "SIM") {
         require '../inc/config.php';

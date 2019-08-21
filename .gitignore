@@ -2,3 +2,4 @@ inc/config.php
 composer.lock
 composer.phar
 vendor/
+covers/

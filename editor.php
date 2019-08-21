@@ -121,9 +121,9 @@ if (isset($_REQUEST["_id"])) {
     }
     
     if (isset($cursor["_source"]["classifications"])) {
-        $isbnValue = $cursor["_source"]["classifications"];
+        $classificationsValue = $cursor["_source"]["classifications"];
     } else {
-        $isbnValue = "";
+        $classificationsValue = "";
     }    
 
 }

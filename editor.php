@@ -152,13 +152,13 @@ if (!isset($subjectsValue)) {
     <div class="form-group row">
       <label for="title" class="col-sm-2 col-form-label">Título</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" id="title" name="title" placeholder="Insira o título" value="<?php echo $titleValue; ?>">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Insira o título" value="<?php echo $titleValue; ?>" required>
       </div>
     </div>
     <div class="form-group row">
       <label for="contributor" class="col-sm-2 col-form-label">Autor</label>
       <div class="col-10">
-          <input type="text" class="form-control" id="contributor" name="contributor" placeholder="Insira o autor no formato (SOBRENOME, Nome), caso tenha mais de um autor, separe por ponto e vírgula" value="<?php echo $contributorValue; ?>">
+          <input type="text" class="form-control" id="contributor" name="contributor" placeholder="Insira o autor no formato (SOBRENOME, Nome), caso tenha mais de um autor, separe por ponto e vírgula" value="<?php echo $contributorValue; ?>" required>
       </div>
     </div>    
     <div class="form-group row">

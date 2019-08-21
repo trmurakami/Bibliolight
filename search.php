@@ -74,14 +74,28 @@ if (isset($_GET["sort"])) {
 
                     echo '</div>
                             <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>
-                                <p class="card-text">
-                                    <small class="text-muted">Autor(es): '.implode(";", $r["_source"]["contributor"]).'</small><br/>
-                                    <small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>
-                                    <small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>
-                                    <small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small>
-                                </p>
+                            <div class="card-body">';
+
+                                if (!empty($r["_source"]["title"])) {
+                                    echo ' <h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_source"]["title"].'</a></h5>';
+                                } else {
+                                    echo '<h5 class="card-title"><a href="node.php?_id='.$r["_id"].'">'.$r["_id"].'</a></h5>';
+                                }                               
+                                echo '<p class="card-text">';
+
+                                if (!empty($r["_source"]["contributor"])) {
+                                    echo '<small class="text-muted">Autor(es): '.implode(";", $r["_source"]["contributor"]).'</small><br/>';
+                                }
+                                if (!empty($r["_source"]["publisher"])) {
+                                    echo '<small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>';
+                                }
+                                if (!empty($r["_source"]["date"])) {
+                                    echo '<small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>';
+                                }
+                                if (!empty($r["_source"]["identifier"])) {
+                                    echo '<small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small>';
+                                }   
+                    echo '</p>
                                 
                             </div>
                             </div>

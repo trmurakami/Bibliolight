@@ -6,6 +6,23 @@
     use Ramsey\Uuid\Uuid;
     use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
+if (isset($_REQUEST["isbn"])) {
+    $url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_REQUEST["isbn"].'';
+    $json_isbn = file_get_contents($url_isbn);
+    $record_isbn = json_decode($json_isbn, true);
+    if ($record_isbn["totalItems"] == 1) {
+        $titleValue = $record_isbn["items"][0]["volumeInfo"]["title"];
+        $contributorValue = implode(";", $record_isbn["items"][0]["volumeInfo"]["authors"]);
+        if (isset($record_isbn["items"][0]["volumeInfo"]["publisher"])) {
+            $publisherValue = $record_isbn["items"][0]["volumeInfo"]["publisher"];
+        }
+        if (isset($record_isbn["items"][0]["volumeInfo"]["publishedDate"])) {
+            $dateValue = $record_isbn["items"][0]["volumeInfo"]["publishedDate"];
+        }
+        $isbnValue = $_REQUEST["isbn"];
+    }
+    //print_r($record_isbn);
+}
 
 if (isset($_REQUEST["ID"])) {
     //print_r($_REQUEST);
@@ -77,16 +94,26 @@ if (isset($_REQUEST["_id"])) {
         $subjectsValue = "";
     }     
 
-} else {
-    $titleValue = "";
-    $contributorValue = "";
-    $publisherValue = "";
-    $dateValue = "";
-    $isbnValue = "";
-    $subjectsValue = "";
 }
 
-
+if (!isset($titleValue)) {
+    $titleValue = "";
+}
+if (!isset($contributorValue)) {
+    $contributorValue = "";
+}
+if (!isset($publisherValue)) {
+    $publisherValue = "";
+}
+if (!isset($dateValue)) {
+    $dateValue = "";
+}
+if (!isset($isbnValue)) {
+    $isbnValue = "";
+}
+if (!isset($subjectsValue)) {
+    $subjectsValue = "";
+}
 
 
 ?>

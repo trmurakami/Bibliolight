@@ -293,8 +293,6 @@ class Facets
             echo '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.$field.'Modal">ver todos >>></button>  ';
             echo '</li>';
             echo '</ul>';
-            echo '</div>';
-            echo '</div>';
 
             echo '<div class="modal fade" id="'.$field.'Modal" tabindex="-1" role="dialog" aria-labelledby="'.$field.'ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -322,7 +320,7 @@ class Facets
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
                 </div>
-            </div>
+            </div></div></div>
             ';
         }
     }

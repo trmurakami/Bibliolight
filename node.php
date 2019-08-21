@@ -56,8 +56,21 @@ if (isset($_REQUEST['delete'])) {
                 <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
                 <h5>ISBN: <?php echo $cursor["_source"]["identifier"][0]["value"]; ?></h5>
+                <h5>Localização física: <?php echo $cursor["_source"]["classifications"]; ?></h5>
             </div>
             <div class="col-4">
+                <?php
+                if (!empty($cursor["_source"]["identifier"])) {
+                    $path_filename_ext = 'covers/'.$cursor["_source"]["identifier"][0]["value"].'.jpg';
+                    if (file_exists($path_filename_ext)) {
+                        echo  '<img src="'.$path_filename_ext.'" class="card-img" alt="Capa">';
+                    } else {
+                        $cover_link = 'https://covers.openlibrary.org/b/isbn/'.$cursor["_source"]["identifier"][0]["value"].'-M.jpg';
+                        echo  '<img src="'.$cover_link.'" class="card-img" alt="Capa">';
+                    }
+                }
+                ?>
+
                 <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>
                 <!-- Button trigger modal delete -->
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Excluir registro</button>                

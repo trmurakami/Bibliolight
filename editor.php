@@ -61,7 +61,10 @@ if (isset($_REQUEST["ID"])) {
     }
     if (!empty($_REQUEST["subjects"])) {
         $query["doc"]["subjects"] = explode(";", $_REQUEST["subjects"]);
-    } 
+    }
+    if (!empty($_REQUEST["classifications"])) {
+        $query["doc"]["classifications"] = $_REQUEST["classifications"];
+    }      
     $query["doc_as_upsert"] = true;
     print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
@@ -115,7 +118,13 @@ if (isset($_REQUEST["_id"])) {
         $subjectsValue = implode(";", $cursor["_source"]["subjects"]);
     } else {
         $subjectsValue = "";
-    }     
+    }
+    
+    if (isset($cursor["_source"]["classifications"])) {
+        $isbnValue = $cursor["_source"]["classifications"];
+    } else {
+        $isbnValue = "";
+    }    
 
 }
 
@@ -137,7 +146,9 @@ if (!isset($isbnValue)) {
 if (!isset($subjectsValue)) {
     $subjectsValue = "";
 }
-
+if (!isset($classificationsValue)) {
+    $classificationsValue = "";
+}
 
 ?>
 <!doctype html>
@@ -203,6 +214,12 @@ if (!isset($subjectsValue)) {
           <input type="text" class="form-control" id="subjects" name="subjects" placeholder="Insira os assuntos (separados por ponto e vírgula ;)"  value="<?php echo $subjectsValue; ?>">
       </div>
     </div>
+    <div class="form-group row">
+      <label for="date" class="col-sm-2 col-form-label">Localização física</label>
+      <div class="col-sm-10">
+          <input type="text" class="form-control" id="classifications" name="classifications" placeholder="Insira a localização física" value="<?php echo $classificationsValue; ?>">
+      </div>
+    </div>    
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="customFile" name="cover">
         <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente com nome usando o mesmo ISBN e jpg. Ex: 9788585637323.jpg)</label>

@@ -102,8 +102,11 @@ if (isset($_GET["sort"])) {
                                     echo '<small class="text-muted">Data de publicação: '.$r["_source"]["date"].'</small><br/>';
                                 }
                                 if (!empty($r["_source"]["identifier"])) {
-                                    echo '<small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small>';
-                                }   
+                                    echo '<small class="text-muted">ISBN: '.$r["_source"]["identifier"][0]["value"].'</small><br/>';
+                                }
+                                if (!empty($r["_source"]["classifications"])) {
+                                    echo '<small class="text-muted">Localização física: '.$r["_source"]["classifications"].'</small>';
+                                }                                     
                     echo '</p>
                                 
                             </div>

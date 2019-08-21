@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="Tiago Murakami">
-        <title>Biblioteca Bibliolight</title>
+        <title><?php echo $library_name; ?></title>
 
         <link rel="canonical" href="https://github.com/trmurakami/bibliolight">
 
@@ -39,8 +39,8 @@
         <?php include 'inc/navbar.php'; ?>
 
         <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">Biblioteca Bibliolight</h1>
-            <p class="lead">Ferramenta de gestão de acervo da Biblioteca Bibliolight.</p>
+            <h1 class="display-4"><?php echo $library_name; ?></h1>
+            <p class="lead">Ferramenta de gestão de acervo da <?php echo $library_name; ?>.</p>
 
             <div class="container">
             <form action="search.php" method="get">

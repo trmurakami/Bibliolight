@@ -60,9 +60,7 @@ if (isset($_REQUEST['delete'])) {
             <div class="col-4">
                 <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>
                 <!-- Button trigger modal delete -->
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                    Excluir registro teste
-                </button>                
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Excluir registro</button>                
                 
             </div>
         </div>

@@ -31,7 +31,7 @@ if (isset($_REQUEST["isbn"])) {
     $url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_REQUEST["isbn"].'';
     $json_isbn = file_get_contents($url_isbn);
     $record_isbn = json_decode($json_isbn, true);
-    if ($record_isbn["totalItems"] == 1) {
+    if ($record_isbn["totalItems"] > 1) {
         $titleValue = $record_isbn["items"][0]["volumeInfo"]["title"];
         $contributorValue = implode(";", $record_isbn["items"][0]["volumeInfo"]["authors"]);
         if (isset($record_isbn["items"][0]["volumeInfo"]["publisher"])) {
@@ -39,11 +39,11 @@ if (isset($_REQUEST["isbn"])) {
         }
         if (isset($record_isbn["items"][0]["volumeInfo"]["publishedDate"])) {
             $dateValue = $record_isbn["items"][0]["volumeInfo"]["publishedDate"];
-        }
-        $isbnValue = $_REQUEST["isbn"];
+        }        
     } else {
         $alert = '<div class="alert alert-danger" role="alert">ISBN não encontrado no Google Books</div>';
     }
+    $isbnValue = $_REQUEST["isbn"];
     //print_r($record_isbn);
 }
 

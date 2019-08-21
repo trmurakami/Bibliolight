@@ -1,9 +1,14 @@
 <?php 
-
-// Delete
-//$params = ['index' => $index];
-//$response = $client->indices()->delete($params);
-
+if (isset($_GET["delete"])) {
+    if ($_GET["delete"] == "SIM") {
+        require '../inc/config.php';
+        require '../inc/functions.php';
+        // Delete
+        $params = ['index' => $index];
+        $response = $client->indices()->delete($params);
+        header('Location: ../index.php');
+    }
+}
 ?>
 
 
@@ -28,9 +33,13 @@
 
     <h1>Administração</h1>
 
+    <h2>Operações de registro</h2>
+    <p>Gerenciar operações de registro</p>
     <a class="btn btn-success" href="../editor.php" role="button">Adicionar registro</a>
 
+    <h2>Elasticsearch</h2>
     <!-- Button trigger modal delete -->
+    <p>Gerenciar operações no Elasticsearch</p>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAllModal">
         Excluir indice no Elasticsearch
     </button>  

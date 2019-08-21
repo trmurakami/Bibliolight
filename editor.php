@@ -31,8 +31,8 @@ if (isset($_REQUEST["isbn"])) {
     $url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_REQUEST["isbn"].'';
     $json_isbn = file_get_contents($url_isbn);
     $record_isbn = json_decode($json_isbn, true);
-    print_r($record_isbn);
-    if ($record_isbn["totalItems"] > 1) {
+    //print_r($record_isbn);
+    if ($record_isbn["totalItems"] == 1) {
         $titleValue = $record_isbn["items"][0]["volumeInfo"]["title"];
         $contributorValue = implode(";", $record_isbn["items"][0]["volumeInfo"]["authors"]);
         if (isset($record_isbn["items"][0]["volumeInfo"]["publisher"])) {

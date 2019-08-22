@@ -7,7 +7,7 @@
     use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 if (isset($_FILES['cover']['name'])) {
-    if (($_FILES['cover']['name']!="")){
+    if (($_FILES['cover']['name']!="")) {
         // Where the file is going to be stored
         $target_dir = "covers/";
         $file = $_FILES['cover']['name'];
@@ -21,7 +21,7 @@ if (isset($_FILES['cover']['name'])) {
         if (file_exists($path_filename_ext)) {
             $alert = '<div class="alert alert-danger" role="alert">Desculpe, arquivo já existe.</div>';
         } else {
-            move_uploaded_file($temp_name,$path_filename_ext);
+            move_uploaded_file($temp_name, $path_filename_ext);
             $alert = '<div class="alert alert-success" role="alert">Parabéns! Arquivo carregado com sucesso.</div>';
         }
     }
@@ -54,6 +54,7 @@ if (isset($_REQUEST["ID"])) {
     if (!empty($_REQUEST["contributor"])) {
         $query["doc"]["contributor"] = explode(";", $_REQUEST["contributor"]);
     }
+    $query["doc"]["editions"] = $_REQUEST["editions"];    
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
     if (!empty($_REQUEST["isbn"])) {
@@ -95,7 +96,13 @@ if (isset($_REQUEST["_id"])) {
         $contributorValue = implode(";", $cursor["_source"]["contributor"]);
     } else {
         $contributorValue = "";
-    }  
+    } 
+    
+    if (isset($cursor["_source"]["editions"])) {
+        $editionsValue = $cursor["_source"]["editions"];
+    } else {
+        $editionsValue = "";
+    }     
 
     if (isset($cursor["_source"]["publisher"])) {
         $publisherValue = $cursor["_source"]["publisher"];
@@ -134,6 +141,9 @@ if (!isset($titleValue)) {
 }
 if (!isset($contributorValue)) {
     $contributorValue = "";
+}
+if (!isset($editionsValue)) {
+    $editionsValue = "";
 }
 if (!isset($publisherValue)) {
     $publisherValue = "";
@@ -193,7 +203,13 @@ if (!isset($classificationsValue)) {
       <div class="col-10">
           <input type="text" class="form-control" id="contributor" name="contributor" placeholder="Insira o autor no formato (SOBRENOME, Nome), caso tenha mais de um autor, separe por ponto e vírgula" value="<?php echo $contributorValue; ?>" required>
       </div>
-    </div>    
+    </div> 
+    <div class="form-group row">
+      <label for="contributor" class="col-sm-2 col-form-label">Edição</label>
+      <div class="col-10">
+          <input type="text" class="form-control" id="editions" name="editions" placeholder="Insira o declaração de edição" value="<?php echo $editionsValue; ?>">
+      </div>
+    </div>           
     <div class="form-group row">
       <label for="publisher" class="col-sm-2 col-form-label">Imprenta</label>
       <div class="col-7">

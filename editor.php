@@ -57,7 +57,10 @@ if (isset($_REQUEST["ID"])) {
     $query["doc"]["editions"] = $_REQUEST["editions"];    
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
-    $query["doc"]["languages"] = $_REQUEST["languages"];
+    
+    $languagesArray = explode("|", $_REQUEST["languages"]);
+    $query["doc"]["languages"][0]["name"] = $languagesArray[0];
+    $query["doc"]["languages"][0]["code"] = $languagesArray[1];
     
     if (!empty($_REQUEST["physicalDescriptions"])) {
         $query["doc"]["physicalDescriptions"] = $_REQUEST["physicalDescriptions"];

@@ -58,6 +58,9 @@ if (isset($_REQUEST['delete'])) {
                 <?php endif; ?>                
                 <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
+                <?php if (isset($cursor["_source"]["physicalDescriptions"])) : ?>
+                    <h5>Descrição física: <?php echo $cursor["_source"]["physicalDescriptions"]; ?></h5>
+                <?php endif; ?>                
                 <?php if (isset($cursor["_source"]["identifier"][0]["value"])) : ?>
                     <h5>ISBN: <?php echo $cursor["_source"]["identifier"][0]["value"]; ?></h5>
                 <?php endif; ?>

@@ -57,6 +57,10 @@ if (isset($_REQUEST["ID"])) {
     $query["doc"]["editions"] = $_REQUEST["editions"];    
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
+    $query["doc"]["languages"] = $_REQUEST["languages"];
+    if (!empty($_REQUEST["physicalDescriptions"])) {
+        $query["doc"]["physicalDescriptions"] = $_REQUEST["physicalDescriptions"];
+    }      
     if (!empty($_REQUEST["isbn"])) {
         $query["doc"]["identifier"][0]["value"] = $_REQUEST["isbn"];
         $query["doc"]["identifier"][0]["type"] = "ISBN";
@@ -114,7 +118,19 @@ if (isset($_REQUEST["_id"])) {
         $dateValue = $cursor["_source"]["date"];
     } else {
         $dateValue = "";
-    }  
+    }
+    
+    if (isset($cursor["_source"]["physicalDescriptions"])) {
+        $physicalDescriptionsValue = $cursor["_source"]["physicalDescriptions"];
+    } else {
+        $physicalDescriptionsValue = "";
+    }
+    
+    if (isset($cursor["_source"]["languages"])) {
+        $languagesValue = $cursor["_source"]["languages"];
+    } else {
+        $languagesValue = "";
+    }    
 
     if (isset($cursor["_source"]["identifier"])) {
         $isbnValue = $cursor["_source"]["identifier"][0]["value"];
@@ -150,6 +166,12 @@ if (!isset($publisherValue)) {
 }
 if (!isset($dateValue)) {
     $dateValue = "";
+}
+if (!isset($physicalDescriptionsValue)) {
+    $physicalDescriptionsValue = "";
+}
+if (!isset($languagesValue)) {
+    $languagesValue = "";
 }
 if (!isset($isbnValue)) {
     $isbnValue = "";
@@ -205,7 +227,7 @@ if (!isset($classificationsValue)) {
       </div>
     </div> 
     <div class="form-group row">
-      <label for="contributor" class="col-sm-2 col-form-label">Edição</label>
+      <label for="editions" class="col-sm-2 col-form-label">Edição</label>
       <div class="col-10">
           <input type="text" class="form-control" id="editions" name="editions" placeholder="Insira o declaração de edição" value="<?php echo $editionsValue; ?>">
       </div>
@@ -219,6 +241,24 @@ if (!isset($classificationsValue)) {
           <input type="text" class="form-control" id="date" name="date" placeholder="Insira a data de publicação" pattern="\d\d\d\d" value="<?php echo $dateValue; ?>">
       </div>
     </div>
+    <div class="form-group row">
+      <label for="physicalDescriptions" class="col-sm-2 col-form-label">Descrição física</label>
+      <div class="col-10">
+          <input type="text" class="form-control" id="physicalDescriptions" name="physicalDescriptions" placeholder="Insira a descrição física" value="<?php echo $physicalDescriptionsValue; ?>">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="languages" class="col-sm-2 col-form-label">Idioma</label>
+      <div class="col-10">
+          <select class="form-control" id="languages" name="languages" multiple>
+            <option value="por" selected>Português</option>
+            <option value="eng">Inglês</option>
+            <option value="spa">Espanhol</option>
+            <option value="fre">Francês</option>
+            <option value="und">Indeterminado</option>
+          </select>
+      </div>
+    </div>              
     <div class="form-group row">
       <label for="date" class="col-sm-2 col-form-label">ISBN</label>
       <div class="col-sm-10">

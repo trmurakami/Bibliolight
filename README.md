@@ -1,7 +1,7 @@
 # bibliolight
 Software livre para gestão de acervos bibliográficos
 
-
+Você pode experimentar uma versão demo online: http://35.226.140.213/bibliolight/
 
 
 ## Dependencias
@@ -29,7 +29,13 @@ Editar o arquivo config.php
 
 ## Instalação no Windows
 
+Baixar a versão compilada e extrair do zip
 
+Entrar no diretório elasticsearch/bin e executar o elasticsearch.bin
+
+Aguardar o Elasticsearch carregar
+
+Executar o arquivo bibliolight.exe
 
 ## Doação
 

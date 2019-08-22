@@ -290,6 +290,9 @@ if (!isset($classificationsValue)) {
     </div> 
     <br/><br/>              
     <button type="submit" class="btn btn-primary">Salvar</button>
+    <button class="btn btn-danger" onclick="history.go(-1);">Voltar</button>
+
+
     </form>
   </div>
 

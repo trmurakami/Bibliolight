@@ -168,7 +168,7 @@ class Requests
     static function getParser($get)
     {
         global $antiXss;
-        $query = [];
+        $query = [];        
 
         if (!empty($get['fields'])) {
             $query["query"]["bool"]["must"]["query_string"]["fields"] = $get['fields'];
@@ -236,7 +236,7 @@ class Requests
         //$query["query"]["bool"]["must"]["query_string"]["analyzer"] = "portuguese";
         //$query["query"]["bool"]["must"]["query_string"]["phrase_slop"] = 10;
         
-        return compact('page', 'query', 'limit', 'skip');
+        return compact('page', 'query', 'limit', 'skip', 'queryComplete');
     }
 
 }
@@ -246,6 +246,12 @@ class Facets
     public function facet($field, $size, $field_name, $sort, $sort_type, $get_search, $open = false)
     {
         global $url_base;
+        if (!empty($get_search)) {
+            $queryComplete = http_build_query($get_search);
+        } else {
+            $queryComplete = "";
+        }
+        
         $query = $this->query;
         $query["aggs"]["counts"]["terms"]["field"] = "$field.keyword";
         if (!empty($_SESSION['oauthuserdata'])) {
@@ -268,7 +274,7 @@ class Facets
             echo '<ul class="list-group list-group-flush">';
             foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                echo '<a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
+                echo '<a href="search.php?'.$queryComplete.'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
                       <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
                 echo '</li>';
             };

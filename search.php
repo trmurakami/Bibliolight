@@ -130,11 +130,11 @@ if (isset($_GET["sort"])) {
                         if (!isset($_GET["search"])) {
                             $_GET["search"] = null;
                         }
-                            $facets->facet("contributor", 50, "Autores", null, "_term", $_GET["search"], true);
-                            $facets->facet("publisher", 50, "Editoras", null, "_term", $_GET["search"], true);
-                            $facets->facet("date", 50, "Data de publicação", "desc", "_term", $_GET["search"], true);
-                            $facets->facet("subjects", 50, "Assuntos", null, "_term", $_GET["search"], true);
-                            $facets->facet("languages.name", 50, "Idioma", null, "_term", $_GET["search"], true);
+                            $facets->facet("contributor", 50, "Autores", null, "_term", $_GET, true);
+                            $facets->facet("publisher", 50, "Editoras", null, "_term", $_GET, true);
+                            $facets->facet("date", 50, "Data de publicação", "desc", "_term", $_GET, true);
+                            $facets->facet("subjects", 50, "Assuntos", null, "_term", $_GET, true);
+                            $facets->facet("languages.name", 50, "Idioma", null, "_term", $_GET, true);
                         ?>
                         
                     </div>

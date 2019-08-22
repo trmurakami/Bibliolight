@@ -66,17 +66,14 @@
                     <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="search.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
                     </ul>
-                    </div>
-                    <!--
+                    </div>                    
                     <div class="col-6 col-md">
-                    <h5>Resources</h5>
+                    <h5>Operações</h5>
                     <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
+                    <li><a class="text-muted" href="tools/export.php?format=table">Exportar todos os registros em CSV</a></li>
                     </ul>
                     </div>
+                    <!--
                     <div class="col-6 col-md">
                     <h5>About</h5>
                     <ul class="list-unstyled text-small">

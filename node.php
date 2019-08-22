@@ -61,6 +61,7 @@ if (isset($_REQUEST['delete'])) {
                 <?php endif; ?>
             </div>
             <div class="col-4">
+                <p>
                 <?php
                 if (!empty($cursor["_source"]["identifier"])) {
                     $path_filename_ext = 'covers/'.$cursor["_source"]["identifier"][0]["value"].'.jpg';
@@ -72,11 +73,12 @@ if (isset($_REQUEST['delete'])) {
                     }
                 }
                 ?>
-
+                </p>
+                <p>
                 <a class="btn btn-warning" href="editor.php?_id=<?php echo $_GET['_id']; ?>" role="button">Editar registro</a>
                 <!-- Button trigger modal delete -->
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Excluir registro</button>                
-                
+                </p>
             </div>
         </div>
         <br/><br/><br/><br/>            

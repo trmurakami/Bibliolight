@@ -95,6 +95,9 @@ if (isset($_GET["sort"])) {
                                 if (!empty($r["_source"]["contributor"])) {
                                     echo '<small class="text-muted">Autor(es): '.implode(";", $r["_source"]["contributor"]).'</small><br/>';
                                 }
+                                if (!empty($r["_source"]["editions"])) {
+                                    echo '<small class="text-muted">Edição: '.$r["_source"]["editions"].'</small><br/>';
+                                }                                
                                 if (!empty($r["_source"]["publisher"])) {
                                     echo '<small class="text-muted">Editora: '.$r["_source"]["publisher"].'</small><br/>';
                                 }

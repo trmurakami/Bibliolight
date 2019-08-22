@@ -53,9 +53,14 @@ if (isset($_REQUEST['delete'])) {
                 <h1><?php echo $cursor["_source"]["title"]; ?></h1>
                 <h5>ID: <?php echo $cursor["_id"]; ?></h5>
                 <h5>Autor: <?php echo $cursor["_source"]["contributor"][0]; ?></h5>
+                <?php if (isset($cursor["_source"]["editions"])) : ?>
+                    <h5>Edição: <?php echo $cursor["_source"]["editions"]; ?></h5>
+                <?php endif; ?>                
                 <h5>Editora: <?php echo $cursor["_source"]["publisher"]; ?></h5>
                 <h5>Data de publicação: <?php echo $cursor["_source"]["date"]; ?></h5>
-                <h5>ISBN: <?php echo $cursor["_source"]["identifier"][0]["value"]; ?></h5>
+                <?php if (isset($cursor["_source"]["identifier"][0]["value"])) : ?>
+                    <h5>ISBN: <?php echo $cursor["_source"]["identifier"][0]["value"]; ?></h5>
+                <?php endif; ?>
                 <?php if (isset($cursor["_source"]["classifications"])) : ?>
                     <h5>Localização física: <?php echo $cursor["_source"]["classifications"]; ?></h5>
                 <?php endif; ?>

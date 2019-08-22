@@ -134,7 +134,7 @@ if (isset($_GET["sort"])) {
                             $facets->facet("publisher", 50, "Editoras", null, "_term", $_GET["search"], true);
                             $facets->facet("date", 50, "Data de publicação", "desc", "_term", $_GET["search"], true);
                             $facets->facet("subjects", 50, "Assuntos", null, "_term", $_GET["search"], true);
-                            $facets->facet("languages.name", 50, "Idiomas", null, "_term", $_GET["search"], true);
+                            $facets->facet("languages.name", 50, "Idioma", null, "_term", $_GET["search"], true);
                         ?>
                         
                     </div>

@@ -58,6 +58,7 @@ if (isset($_REQUEST["ID"])) {
     $query["doc"]["publisher"] = $_REQUEST["publisher"];
     $query["doc"]["date"] = $_REQUEST["date"];
     $query["doc"]["languages"] = $_REQUEST["languages"];
+    
     if (!empty($_REQUEST["physicalDescriptions"])) {
         $query["doc"]["physicalDescriptions"] = $_REQUEST["physicalDescriptions"];
     }      
@@ -66,7 +67,10 @@ if (isset($_REQUEST["ID"])) {
         $query["doc"]["identifier"][0]["type"] = "ISBN";
     }
     if (!empty($_REQUEST["subjects"])) {
-        $query["doc"]["subjects"] = explode(";", $_REQUEST["subjects"]);
+        $subjectsArray = explode(";", $_REQUEST["subjects"]);
+        foreach ($subjectsArray as $subjectsUnits) {
+            $query["doc"]["subjects"][] = trim($subjectsUnits);
+        }
     }
     if (!empty($_REQUEST["classifications"])) {
         $query["doc"]["classifications"] = $_REQUEST["classifications"];
@@ -250,12 +254,12 @@ if (!isset($classificationsValue)) {
     <div class="form-group row">
       <label for="languages" class="col-sm-2 col-form-label">Idioma</label>
       <div class="col-10">
-          <select class="form-control" id="languages" name="languages" multiple>
-            <option value="por" selected>Português</option>
-            <option value="eng">Inglês</option>
-            <option value="spa">Espanhol</option>
-            <option value="fre">Francês</option>
-            <option value="und">Indeterminado</option>
+          <select class="form-control" id="languages" name="languages">
+            <option value="Português|por" selected>Português</option>
+            <option value="Inglês|eng">Inglês</option>
+            <option value="Espanhol|spa">Espanhol</option>
+            <option value="Francês|fre">Francês</option>
+            <option value="Indeterminado|und">Indeterminado</option>
           </select>
       </div>
     </div>              

@@ -65,6 +65,7 @@
                         <h5>Estatísticas</h5>
                         <ul class="list-unstyled text-small">
                             <li><a class="text-muted" href="search.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
+                            <li><a class="text-muted" href="search.php?search[]=_exists_:circ.name">Quantidade de empréstimos: <?php echo Homepage::numberCirc(); ?></a></li>
                         </ul>
                     </div>                    
                     <div class="col-6 col-md">

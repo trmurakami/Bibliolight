@@ -373,7 +373,23 @@ Class Homepage
         $response = Elasticsearch::search(null, 0, $body);
         return $response["hits"]["total"]["value"];
 
-    }    
+    }
+    
+    static function numberCirc()
+    {
+        $body = '
+        {
+            "query": {
+                "exists": {
+                    "field": "circ.name"
+                }
+            }
+        }
+        '; 
+        $response = Elasticsearch::search(null, 0, $body);
+        return $response["hits"]["total"]["value"];
+
+    }      
 
 }
 

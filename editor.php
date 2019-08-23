@@ -83,7 +83,7 @@ if (isset($_REQUEST["ID"])) {
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
     //print_r($result);
     sleep(2); 
-    echo '<script>window.location = \'index.php\'</script>';
+    header('Location: node.php?_id='.$_REQUEST["ID"].'');
 } else {
     $uuid4 = Uuid::uuid4();
     $uuid = $uuid4->toString();

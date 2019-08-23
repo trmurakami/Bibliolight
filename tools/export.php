@@ -41,7 +41,7 @@ if (isset($_GET["format"])) {
             $cursor = $client->search($params);
             $total = $cursor["hits"]["total"];
 
-            $content[] = "ID\tTítulo\tAutor\tEditora\tAno de publicação\tISBN";
+            $content[] = "ID\tTítulo\tAutor\tEditora\tAno de publicação\tEdição\tISBN\tAssuntos\tLocalização física";
 
             foreach ($cursor["hits"]["hits"] as $r) {
                 unset($fields);
@@ -68,21 +68,31 @@ if (isset($_GET["format"])) {
                     $fields[] = "";
                 }
 
+                if (!empty($r["_source"]["editions"])) {
+                    $fields[] = $r["_source"]["editions"];
+                } else {
+                    $fields[] = "";
+                }
+
                 if (!empty($r["_source"]["identifier"])) {
                     $fields[] = $r["_source"]["identifier"][0]["value"];
                 } else {
                     $fields[] = "";
-                }   
+                }
+                
+                if (!empty($r["_source"]["subjects"])) {
+                    $fields[] = implode('; ', $r["_source"]["subjects"]);
+                } else {
+                    $fields[] = "";
+                }
+                
+                if (!empty($r["_source"]["classifications"])) {
+                    $fields[] = $r["_source"]["classifications"];
+                } else {
+                    $fields[] = "";
+                }                 
 
-                // foreach ($r["_source"]['author'] as $authors) {
-                //     if (!empty($authors["person"]["potentialAction"])) {
-                //       $authors_array[]= ''.$authors["person"]["name"].' ('.$authors["person"]["potentialAction"].')';
-                //     } else {
-                //       $authors_array[]= $authors["person"]["name"];
-                //     }
-                // }
-                // $fields[] = implode(";", $authors_array);
-                // unset($authors_array);       
+  
 
 
                 $content[] = implode("\t", $fields);
@@ -108,27 +118,47 @@ if (isset($_GET["format"])) {
 
                     $fields[] = $r["_source"]["title"];
     
+                    if (!empty($r["_source"]["contributor"])) {
+                        $fields[] = $r["_source"]["contributor"][0];
+                    } else {
+                        $fields[] = "";
+                    }                
+    
                     if (!empty($r["_source"]["publisher"])) {
                         $fields[] = $r["_source"]["publisher"];
                     } else {
                         $fields[] = "";
                     }
                     
-                    if (!empty($r["_source"]['date'])) {
-                        $fields[] = $r["_source"]['date'];
+                    if (!empty($r["_source"]["date"])) {
+                        $fields[] = $r["_source"]["date"];
                     } else {
                         $fields[] = "";
-                    }                
+                    }
     
-                    // foreach ($r["_source"]['author'] as $authors) {
-                    //     if (!empty($authors["person"]["potentialAction"])) {
-                    //       $authors_array[]= ''.$authors["person"]["name"].' ('.$authors["person"]["potentialAction"].')';
-                    //     } else {
-                    //       $authors_array[]= $authors["person"]["name"];
-                    //     }
-                    // }
-                    // $fields[] = implode(";", $authors_array);
-                    // unset($authors_array); 
+                    if (!empty($r["_source"]["editions"])) {
+                        $fields[] = $r["_source"]["editions"];
+                    } else {
+                        $fields[] = "";
+                    }
+    
+                    if (!empty($r["_source"]["identifier"])) {
+                        $fields[] = $r["_source"]["identifier"][0]["value"];
+                    } else {
+                        $fields[] = "";
+                    }
+                    
+                    if (!empty($r["_source"]["subjects"])) {
+                        $fields[] = implode('; ', $r["_source"]["subjects"]);
+                    } else {
+                        $fields[] = "";
+                    }
+                    
+                    if (!empty($r["_source"]["classifications"])) {
+                        $fields[] = $r["_source"]["classifications"];
+                    } else {
+                        $fields[] = "";
+                    }  
 
                     $content[] = implode("\t", $fields);
                     unset($fields);

@@ -105,7 +105,10 @@ if (isset($_GET["sort"])) {
                                 }
                                 if (!empty($r["_source"]["classifications"])) {
                                     echo '<small class="text-muted">Localização física: '.$r["_source"]["classifications"].'</small>';
-                                }                                     
+                                }
+                                if (!empty($r["_source"]["circ"])) {
+                                    echo '<br/><small class="text-muted"><div class="alert alert-warning" role="alert">Emprestado</div></small>';
+                                }                                                                      
                     echo '</p>
                                 
                             </div>

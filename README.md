@@ -6,10 +6,9 @@ Você pode experimentar uma versão demo online: http://35.226.140.213/bibliolig
 
 ## Dependencias
 
-PHP 7
-
-Elasticsearch > 7.2
-
+- [Apache 2](https://httpd.apache.org/)
+- [PHP > 7](https://www.php.net/)
+- [Elasticsearch > 7.2](https://www.elastic.co/pt/products/elasticsearch)
 
 ## Instalação no Linux
 

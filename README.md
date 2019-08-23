@@ -32,7 +32,7 @@ Baixar a versão compilada e extrair do zip
 
 Entrar no diretório elasticsearch/bin e executar o elasticsearch.bin
 
-Aguardar o Elasticsearch carregar
+Aguardar o Elasticsearch carregar (A primeira execução demora mais do que as demais)
 
 Executar o arquivo bibliolight.exe
 

@@ -43,15 +43,15 @@
             <p class="lead">Ferramenta de gestão de acervo da <?php echo $library_name; ?>.</p>
 
             <div class="container">
-            <form action="search.php" method="get">
-            <div class="form-group">
-            <label for="searchHelp">Pesquisar</label>
-            <input type="text" class="form-control" id="search" name="search[]" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
-            <small id="searchHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
-            <small id="searchHelp" class="form-text text-muted">Para pesquisar por parte de uma palavra, digite a parte com asterisco. Ex.: biblio*</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Pesquisar</button>
-            </form>
+                <form action="search.php" method="get">
+                    <div class="form-group">
+                        <label for="searchHelp">Pesquisar</label>
+                        <input type="text" class="form-control" id="search" name="search[]" aria-describedby="searchHelp" placeholder="Digite a expressão de busca">
+                        <small id="searchHelp" class="form-text text-muted">Você pode pesquisar por título, autor, editora...</small>
+                        <small id="searchHelp" class="form-text text-muted">Para pesquisar por parte de uma palavra, digite a parte com asterisco. Ex.: biblio*</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </form>
             </div>
             </div>
             <div class="container">
@@ -62,16 +62,17 @@
                     <small class="d-block mb-3 text-muted">Desenvolvido com <a target="_blank" rel="noopener noreferrer nofollow" href="https://trmurakami.github.io/bibliolight">Bibliolight</a></small>
                     </div>
                     <div class="col-6 col-md">
-                    <h5>Estatísticas</h5>
-                    <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="search.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
-                    </ul>
+                        <h5>Estatísticas</h5>
+                        <ul class="list-unstyled text-small">
+                            <li><a class="text-muted" href="search.php">Quantidade de registros: <?php echo Homepage::numberOfRecords(); ?></a></li>
+                        </ul>
                     </div>                    
                     <div class="col-6 col-md">
                     <h5>Operações</h5>
-                    <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="tools/export.php?format=table">Exportar todos os registros em CSV</a></li>
-                    </ul>
+                        <ul class="list-unstyled text-small">
+                            <li><a class="text-muted" href="tools/export.php?format=table">Exportar todos os registros em CSV</a></li>
+                            <li><a class="text-muted" href="editor.php">Criar novo registro</a></li>
+                        </ul>
                     </div>
                     <!--
                     <div class="col-6 col-md">

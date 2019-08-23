@@ -1,7 +1,7 @@
 <?php
 # Arquivo de Configuração
 
-$library_name = "Biblioteca Bibliolight";
+$library_name = "Acervo Bibliolight";
 
 /* Exibir erros */ 
 ini_set('display_errors', 1); 
@@ -68,41 +68,7 @@ if ($testIndex == false) {
                         ]
                     ]
                 ]
-            ],
-            'mappings' => [ 
-                'properties' => [
-                    'title' => [
-                        'type' => 'text',
-                        'analyzer' => 'portuguese',
-                        'fields' => [
-                            'keyword' => [
-                                'type' => 'keyword',
-                                'ignore_above' => 256
-                            ]
-                        ]
-                    ],
-                    'publisher' => [
-                        'type' => 'text',
-                        'analyzer' => 'portuguese',
-                        'fields' => [
-                            'keyword' => [
-                                'type' => 'keyword',
-                                'ignore_above' => 256
-                            ]
-                        ]
-                    ],
-                    'date' => [
-                        'type' => 'text',
-                        'analyzer' => 'portuguese',
-                        'fields' => [
-                            'keyword' => [
-                                'type' => 'keyword',
-                                'ignore_above' => 256
-                            ]
-                        ]
-                    ]                     
-                ]
-            ]                            
+            ]                           
         ]
     ];
     $responseCreateIndex = $client->indices()->create($createIndexParams);

@@ -36,6 +36,8 @@ Aguardar o Elasticsearch carregar
 
 Executar o arquivo bibliolight.exe
 
+A versão Windows só é possível graças ao [PHP Desktop](https://github.com/cztomczak/phpdesktop)
+
 ## Doação
 
 Você pode ajudar o projeto doando qualquer quantia: [Pagseguro](https://pag.ae/7VbJhhRHP)

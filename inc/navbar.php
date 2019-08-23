@@ -15,5 +15,5 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="btn btn-outline-success" href="editor.php">Criar registro</a>
     </nav>    
-    <a class="btn btn-outline-primary" href="login.php">Login</a>
+    <!-- <a class="btn btn-outline-primary" href="login.php">Login</a> -->
 </div>

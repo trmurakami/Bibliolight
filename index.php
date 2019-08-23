@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-12 col-md">
                     <!-- <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
-                    <small class="d-block mb-3 text-muted">Desenvolvido com <a target="_blank" rel="noopener noreferrer nofollow" href="https://github.com/trmurakami/bibliolight">Bibliolight</a></small>
+                    <small class="d-block mb-3 text-muted">Desenvolvido com <a target="_blank" rel="noopener noreferrer nofollow" href="https://trmurakami.github.io/bibliolight">Bibliolight</a></small>
                     </div>
                     <div class="col-6 col-md">
                     <h5>Estatísticas</h5>

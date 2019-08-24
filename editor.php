@@ -295,7 +295,7 @@ if (!isset($classificationsValue)) {
     </div>    
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="customFile" name="cover">
-        <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente com nome usando o mesmo ISBN e jpg. Ex: 9788585637323.jpg)</label>
+        <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente formato .jpg)</label>
     </div> 
     <br/><br/>              
     <button type="submit" class="btn btn-primary">Salvar</button>

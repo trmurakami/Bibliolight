@@ -28,7 +28,7 @@ Editar o arquivo config.php
 
 ## Instalação no Windows
 
-Baixar a versão compilada e extrair do zip
+Baixar a [versão compilada](https://github.com/trmurakami/Bibliolight/releases/download/v0.9-beta/bibliolight_desktop_beta.zip) e extrair do zip
 
 Entrar no diretório elasticsearch/bin e executar o elasticsearch.bin
 
@@ -36,7 +36,7 @@ Aguardar o Elasticsearch carregar (A primeira execução demora mais do que as d
 
 Executar o arquivo bibliolight.exe
 
-A versão Windows só é possível graças ao [PHP Desktop](https://github.com/cztomczak/phpdesktop)
+Obs: A versão Windows só é possível graças ao [PHP Desktop](https://github.com/cztomczak/phpdesktop)
 
 ## Doação
 

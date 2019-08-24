@@ -117,15 +117,14 @@ if (isset($_REQUEST['delete'])) {
             <div class="col-4">
                 <p>
                 <?php
-                if (!empty($cursor["_source"]["identifier"])) {
-                    $path_filename_ext = 'covers/'.$cursor["_source"]["identifier"][0]["value"].'.jpg';
-                    if (file_exists($path_filename_ext)) {
-                        echo  '<img src="'.$path_filename_ext.'" class="card-img" alt="Capa">';
+                    if (isset($cursor["_source"]["identifier"])) {
+                        $path_filename = 'covers/'.$cursor["_source"]["identifier"][0]["value"].'.jpg';
                     } else {
-                        $cover_link = 'https://covers.openlibrary.org/b/isbn/'.$cursor["_source"]["identifier"][0]["value"].'-M.jpg';
-                        echo  '<img src="'.$cover_link.'" class="card-img" alt="Capa">';
+                        $path_filename = 'covers/'.$cursor["_id"].'.jpg';
                     }
-                }
+                    if (file_exists($path_filename)) {
+                        echo  '<img src="'.$path_filename.'" class="card-img" alt="Capa">';
+                    } 
                 ?>
                 </p>
                 <p>

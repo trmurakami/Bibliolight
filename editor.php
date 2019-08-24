@@ -12,7 +12,16 @@ if (isset($_FILES['cover']['name'])) {
         $target_dir = "covers/";
         $file = $_FILES['cover']['name'];
         $path = pathinfo($file);
-        $filename = $path['filename'];
+
+        print_r($_REQUEST);
+
+        if (!empty($_REQUEST["isbn"])) {
+            $filename = $_REQUEST["isbn"];
+        } elseif (!empty($_REQUEST["ID"])) {
+            $filename = $_REQUEST["ID"];
+        } else {
+            $filename = $path['filename'];
+        }        
         $ext = $path['extension'];
         $temp_name = $_FILES['cover']['tmp_name'];
         $path_filename_ext = $target_dir.$filename.".".$ext;
@@ -79,7 +88,7 @@ if (isset($_REQUEST["ID"])) {
         $query["doc"]["classifications"] = $_REQUEST["classifications"];
     }      
     $query["doc_as_upsert"] = true;
-    print_r($query);
+    //print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
     //print_r($result);
     sleep(2); 

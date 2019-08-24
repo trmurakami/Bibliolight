@@ -4,7 +4,7 @@ if (isset($_GET["format"])) {
 
     if ($_GET["format"] == "table") {
 
-        $file = "export_bdpi.tsv";
+        $file = "bibliolight_export.tsv";
         header('Content-type: text/tab-separated-values; charset=utf-8');
         header("Content-Disposition: attachment; filename=$file");
 

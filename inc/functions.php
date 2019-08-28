@@ -2,6 +2,8 @@
 
 require ('config.php'); 
 
+
+
 /* Exibir erros */ 
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1); 
@@ -350,7 +352,7 @@ class Facets
             while ($i < 5) {
 
                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                echo '<a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
+                echo '<a href="search.php?'.$queryComplete.'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
                         <span class="badge badge-primary badge-pill">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>';
                 echo '</li>';  
                 
@@ -377,7 +379,7 @@ class Facets
 
                     foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
                         echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                        echo '<a href="http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"].'?'.$_SERVER["QUERY_STRING"].'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
+                        echo '<a href="search.php?'.$queryComplete.'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
                             <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
                         echo '</li>';
                     }

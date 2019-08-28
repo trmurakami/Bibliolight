@@ -4,6 +4,9 @@ if (!file_exists('../covers/')) {
     mkdir('../covers', 0755, true);
 }
 
+if (!file_exists('../pdfs')) {
+    mkdir('../pdfs', 0755, true);
+}
 
 if (isset($_GET["delete"])) {
     if ($_GET["delete"] == "SIM") {

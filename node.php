@@ -67,7 +67,7 @@ if (isset($_REQUEST['delete'])) {
             <div class="col-8">
                 <h1><?php echo $cursor["_source"]["title"]; ?></h1>
                 <h5>ID: <?php echo $cursor["_id"]; ?></h5>
-                <h5>Autor: <?php echo $cursor["_source"]["contributor"][0]; ?></h5>
+                <h5>Autor(es): <?php echo implode('; ', $cursor["_source"]["contributor"]); ?></h5>
                 <?php if (isset($cursor["_source"]["editions"])) : ?>
                     <h5>Edição: <?php echo $cursor["_source"]["editions"]; ?></h5>
                 <?php endif; ?>                

@@ -88,6 +88,9 @@ if (isset($_REQUEST['delete'])) {
                 <?php if (isset($cursor["_source"]["classifications"])) : ?>
                     <h5>Localização física: <?php echo $cursor["_source"]["classifications"]; ?></h5>
                 <?php endif; ?>
+                <?php if (isset($cursor["_source"]["notes"])) : ?>
+                    <h5>Nota: <?php echo $cursor["_source"]["notes"]; ?></h5>
+                <?php endif; ?>                
                 <?php if (isset($cursor["_source"]["circ"])) : ?>
                     <?php if (count($cursor["_source"]["circ"]) == 1) : ?>
                         <br/><br/>

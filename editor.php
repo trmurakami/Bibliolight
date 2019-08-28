@@ -86,7 +86,11 @@ if (isset($_REQUEST["ID"])) {
     }
     if (!empty($_REQUEST["classifications"])) {
         $query["doc"]["classifications"] = $_REQUEST["classifications"];
-    }      
+    }    
+    if (!empty($_REQUEST["notes"])) {
+        $query["doc"]["notes"] = $_REQUEST["notes"];
+    }     
+
     $query["doc_as_upsert"] = true;
     //print_r($query);
     $result = Elasticsearch::update($_REQUEST["ID"], $query);
@@ -164,7 +168,13 @@ if (isset($_REQUEST["_id"])) {
         $classificationsValue = $cursor["_source"]["classifications"];
     } else {
         $classificationsValue = "";
-    }    
+    }
+    
+    if (isset($cursor["_source"]["notes"])) {
+        $notesValue = $cursor["_source"]["notes"];
+    } else {
+        $notesValue = "";
+    }        
 
 }
 
@@ -197,6 +207,10 @@ if (!isset($subjectsValue)) {
 }
 if (!isset($classificationsValue)) {
     $classificationsValue = "";
+}
+
+if (!isset($notesValue)) {
+    $notesValue = "";
 }
 
 ?>
@@ -276,23 +290,29 @@ if (!isset($classificationsValue)) {
       </div>
     </div>              
     <div class="form-group row">
-      <label for="date" class="col-sm-2 col-form-label">ISBN</label>
+      <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
       <div class="col-sm-10">
           <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Insira o ISBN (Somente os números)" pattern="\d*" value="<?php echo $isbnValue; ?>">
       </div>
     </div>
     <div class="form-group row">
-      <label for="date" class="col-sm-2 col-form-label">Assuntos</label>
+      <label for="subjects" class="col-sm-2 col-form-label">Assuntos</label>
       <div class="col-sm-10">
           <input type="text" class="form-control" id="subjects" name="subjects" placeholder="Insira os assuntos (separados por ponto e vírgula ;)"  value="<?php echo $subjectsValue; ?>">
       </div>
     </div>
     <div class="form-group row">
-      <label for="date" class="col-sm-2 col-form-label">Localização física</label>
+      <label for="classifications" class="col-sm-2 col-form-label">Localização física</label>
       <div class="col-sm-10">
           <input type="text" class="form-control" id="classifications" name="classifications" placeholder="Insira a localização física" value="<?php echo $classificationsValue; ?>">
       </div>
-    </div>    
+    </div>
+    <div class="form-group row">
+      <label for="notes" class="col-sm-2 col-form-label">Nota</label>
+      <div class="col-sm-10">
+          <input type="text" class="form-control" id="notes" name="notes" placeholder="Insira uma nota" value="<?php echo $notesValue; ?>">
+      </div>
+    </div>           
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="customFile" name="cover">
         <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente formato .jpg)</label>

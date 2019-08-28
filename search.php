@@ -108,7 +108,12 @@ if (isset($_GET["sort"])) {
                                 }
                                 if (!empty($r["_source"]["circ"])) {
                                     echo '<br/><small class="text-muted"><div class="alert alert-warning" role="alert">Emprestado</div></small>';
-                                }                                                                      
+                                }  
+                                $path_pdf = 'pdfs/'.$r["_id"].'.pdf';
+                                if (file_exists($path_pdf)) {
+                                    echo  '<br/><a class="btn btn-warning" href="'.$path_pdf.'" target="_blank">Acessar o PDF</a>';
+                                }                             
+                                
                     echo '</p>
                                 
                             </div>

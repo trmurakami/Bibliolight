@@ -90,7 +90,15 @@ if (isset($_REQUEST['delete'])) {
                 <?php endif; ?>
                 <?php if (isset($cursor["_source"]["notes"])) : ?>
                     <h5>Nota: <?php echo $cursor["_source"]["notes"]; ?></h5>
-                <?php endif; ?>                
+                <?php endif; ?>
+
+                <?php
+                    $path_pdf = 'pdfs/'.$cursor["_id"].'.pdf';
+                    if (file_exists($path_pdf)) {
+                        echo  '<a class="btn btn-warning" href="'.$path_pdf.'" target="_blank" >Acessar o PDF</a>';
+                    } 
+                ?>
+
                 <?php if (isset($cursor["_source"]["circ"])) : ?>
                     <?php if (count($cursor["_source"]["circ"]) == 1) : ?>
                         <br/><br/>

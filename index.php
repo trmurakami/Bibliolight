@@ -42,6 +42,8 @@
             <h1 class="display-4"><?php echo $library_name; ?></h1>
             <p class="lead">Ferramenta de gestão de acervo da <?php echo $library_name; ?>.</p>
 
+            <?php isset($error_connection_message) ? print_r($error_connection_message) : '' ?>
+
             <div class="container">
                 <form action="search.php" method="get">
                     <div class="form-group">

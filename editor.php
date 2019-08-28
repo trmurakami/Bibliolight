@@ -13,8 +13,6 @@ if (isset($_FILES['cover']['name'])) {
         $file = $_FILES['cover']['name'];
         $path = pathinfo($file);
 
-        print_r($_REQUEST);
-
         if (!empty($_REQUEST["isbn"])) {
             $filename = $_REQUEST["isbn"];
         } elseif (!empty($_REQUEST["ID"])) {
@@ -31,10 +29,37 @@ if (isset($_FILES['cover']['name'])) {
             $alert = '<div class="alert alert-danger" role="alert">Desculpe, arquivo já existe.</div>';
         } else {
             move_uploaded_file($temp_name, $path_filename_ext);
-            $alert = '<div class="alert alert-success" role="alert">Parabéns! Arquivo carregado com sucesso.</div>';
+            $alert = '<div class="alert alert-success" role="alert">Parabéns! Capa carregada com sucesso.</div>';
         }
     }
-}    
+}
+
+if (isset($_FILES['pdf']['name'])) {
+    if (($_FILES['pdf']['name']!="")) {
+        // Where the file is going to be stored
+        $target_dir = "pdfs/";
+        $file = $_FILES['pdf']['name'];
+        $path = pathinfo($file);
+
+        if (!empty($_REQUEST["ID"])) {
+            $filename = $_REQUEST["ID"];
+        } else {
+            $filename = $path['filename'];
+        }        
+        $ext = $path['extension'];
+        $temp_name = $_FILES['pdf']['tmp_name'];
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+        
+        // Check if file already exists
+        if (file_exists($path_filename_ext)) {
+            $alert = '<div class="alert alert-danger" role="alert">Desculpe, arquivo já existe.</div>';
+        } else {
+            move_uploaded_file($temp_name, $path_filename_ext);
+            $alert = '<div class="alert alert-success" role="alert">Parabéns! Arquivo PDF carregado com sucesso.</div>';
+        }    
+    }
+}
+    
 
 if (isset($_REQUEST["isbn"])) {
     $url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_REQUEST["isbn"].'';
@@ -315,8 +340,13 @@ if (!isset($notesValue)) {
     </div>           
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="customFile" name="cover">
-        <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente formato .jpg)</label>
+        <label class="custom-file-label" for="customFile">Selecionar arquivo de capa. Somente formato .jpg</label>
     </div> 
+    <br/><br/>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="pdf">
+        <label class="custom-file-label" for="customFile">Selecionar arquivo PDF</label>
+    </div>     
     <br/><br/>              
     <button type="submit" class="btn btn-primary">Salvar</button>
     <button class="btn btn-danger" onclick="history.go(-1);">Voltar</button>

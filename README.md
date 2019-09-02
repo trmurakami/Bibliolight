@@ -28,9 +28,9 @@ Editar o arquivo config.php
 
 ## Instalação no Windows
 
-Baixar a [versão compilada](https://github.com/trmurakami/Bibliolight/releases/download/v0.9-beta/bibliolight_desktop_beta.zip) e extrair do zip
+Baixar a [versão compilada](https://github.com/trmurakami/Bibliolight/releases/download/v1.0/bibliolight_1.0.zip) e extrair do zip
 
-Entrar no diretório elasticsearch/bin e executar o elasticsearch.bin
+Entrar no diretório executar o elasticsearch.ink
 
 Aguardar o Elasticsearch carregar (A primeira execução demora mais do que as demais)
 

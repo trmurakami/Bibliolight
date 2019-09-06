@@ -2,8 +2,6 @@
 
 require ('config.php'); 
 
-
-
 /* Exibir erros */ 
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1); 
@@ -26,45 +24,10 @@ try {
 /* Create index if not exists */
 
 if (isset($testIndex) && $testIndex == false) {
-    $createIndexParams = [
-        'index' => $index,
-        'body' => [
-            'settings' => [
-                'number_of_shards' => 1,
-                'number_of_replicas' => 0,
-                'analysis' => [
-                    'filter' => [
-                        'portuguese_stop' => [
-                            'type' => 'stop',
-                            'stopwords' => 'portuguese'
-                        ],
-                        'my_ascii_folding' => [
-                            'type' => 'asciifolding',
-                            'preserve_original' => true
-                        ],
-                        'portuguese_stemmer' => [
-                            'type' => 'stemmer',
-                            'language' =>  'light_portuguese'
-                        ]
-                    ],
-                    'analyzer' => [
-                        'portuguese' => [
-                            'tokenizer' => 'standard',
-                            'filter' =>  [ 
-                                'standard', 
-                                'lowercase', 
-                                'my_ascii_folding',
-                                'portuguese_stop',
-                                'portuguese_stemmer'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ];
-    $responseCreateIndex = $client->indices()->create($createIndexParams);
+    Elasticsearch::createIndex($index, $client);
+    Elasticsearch::mappingsIndex($index, $client);
 }
+
 
 /**
  * Elasticsearch Class
@@ -92,8 +55,6 @@ class Elasticsearch
         } else {
             $params["index"] = $index;
         }
-
-        $params["type"] = $index;
         $params["id"] = $_id;        
         $params["_source"] = $fields;
 
@@ -147,8 +108,6 @@ class Elasticsearch
         } else {
             $params["index"] = $index;
         }
-
-        $params["type"] = $index;
         $params["id"] = $_id;
         $params["body"] = $body;
 
@@ -173,8 +132,6 @@ class Elasticsearch
         } else {
             $params["index"] = $index;
         }
-
-        $params["type"] = $index;
         $params["id"] = $_id;
         $params["client"]["ignore"] = 404;
 
@@ -223,6 +180,145 @@ class Elasticsearch
         echo '<br/>Resultado: '.($response["_id"]).', '.($response["result"]).', '.($response["_shards"]['successful']).'<br/>';
 
     }
+
+    /**
+     * Cria o indice
+     *
+     * @param string   $indexName  Nome do indice
+     *
+     */
+    static function createIndex($indexName, $client)
+    {
+        $createIndexParams = [
+            'index' => $indexName,
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                    'number_of_replicas' => 0,
+                    'analysis' => [
+                        'filter' => [
+                            'portuguese_stop' => [
+                                'type' => 'stop',
+                                'stopwords' => 'portuguese'
+                            ],
+                            'my_ascii_folding' => [
+                                'type' => 'asciifolding',
+                                'preserve_original' => true
+                            ],
+                            'portuguese_stemmer' => [
+                                'type' => 'stemmer',
+                                'language' =>  'light_portuguese'
+                            ]
+                        ],
+                        'analyzer' => [
+                            'portuguese' => [
+                                'tokenizer' => 'standard',
+                                'filter' =>  [ 
+                                    'lowercase', 
+                                    'my_ascii_folding',
+                                    'portuguese_stop',
+                                    'portuguese_stemmer'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $responseCreateIndex = $client->indices()->create($createIndexParams);
+    } 
+    
+    /**
+     * Cria o indice
+     *
+     * @param string   $indexName  Nome do indice
+     *
+     */
+    static function mappingsIndex($indexName, $client)
+    {
+        // Set the index and type
+        $mappingsParams = [
+            'index' => $indexName,
+            'body' => [
+                'properties' => [
+                    'title' => [
+                        'type' => 'text',
+                        'analyzer' => 'portuguese',
+                        'fields' => [
+                            'keyword' => [
+                                'type' => 'keyword',
+                                'ignore_above' => 256
+                            ]
+                        ]
+                    ],
+                    'contributor' => [
+                        'type' => 'text',
+                        'analyzer' => 'portuguese',
+                        'fields' => [
+                            'keyword' => [
+                                'type' => 'keyword',
+                                'ignore_above' => 256
+                            ]
+                        ]
+                    ],
+                    'editions' => [
+                        'type' => 'text',
+                        'analyzer' => 'portuguese',
+                        'fields' => [
+                            'keyword' => [
+                                'type' => 'keyword',
+                                'ignore_above' => 256
+                            ]
+                        ]
+                    ],
+                    'publisher' => [
+                        'type' => 'text',
+                        'analyzer' => 'portuguese',
+                        'fields' => [
+                            'keyword' => [
+                                'type' => 'keyword',
+                                'ignore_above' => 256
+                            ]
+                        ]
+                    ],                                                               
+                    'date' => [
+                        'type' => 'integer'
+                    ],
+                    'languages' => [
+                        'properties' => [
+                            'name' => [
+                                'type' => 'text',
+                                'analyzer' => 'portuguese',
+                                'fields' => [
+                                    'keyword' => [
+                                        'type' => 'keyword',
+                                        'ignore_above' => 256
+                                    ]
+                                ]                                
+                            ],
+                            'code' => [
+                                'type' => 'text'                             
+                            ]                            
+                        ]
+                    ],
+                    'physicalDescriptions' => [
+                        'type' => 'text',
+                        'analyzer' => 'portuguese',
+                        'fields' => [
+                            'keyword' => [
+                                'type' => 'keyword',
+                                'ignore_above' => 256
+                            ]
+                        ]
+                    ],                                          
+                ]
+            ]
+        ];
+
+        // Update the index mapping
+        $client->indices()->putMapping($mappingsParams);
+    }    
+    
 
 }
 

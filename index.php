@@ -76,6 +76,7 @@
                         <ul class="list-unstyled text-small">
                             <li><a class="text-muted" href="tools/export.php?format=table">Exportar todos os registros em CSV</a></li>
                             <li><a class="text-muted" href="editor.php">Criar novo registro</a></li>
+                            <li><a class="text-muted" href="import.php">Importar registros</a></li>
                         </ul>
                     </div>
                     <!--

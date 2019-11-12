@@ -397,7 +397,7 @@ class Requests
         //$query["query"]["bool"]["must"]["query_string"]["analyzer"] = "portuguese";
         //$query["query"]["bool"]["must"]["query_string"]["phrase_slop"] = 10;
         
-        return compact('page', 'query', 'limit', 'skip', 'queryComplete');
+        return compact('page', 'query', 'limit', 'skip');
     }
 
 }

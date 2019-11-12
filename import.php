@@ -10,9 +10,10 @@ print_r($_FILES);
 if (isset($_FILES['file'])) {
 
     $fh = fopen($_FILES['file']['tmp_name'], 'r+');
-    $row = fgetcsv($fh, 108192, ",");
-
+    $row = fgetcsv($fh, 108192, "\t");
+    
     foreach ($row as $key => $value) {
+
         if ($value == "ID") {
             $rowNum["ID"] = $key;
         }
@@ -43,7 +44,7 @@ if (isset($_FILES['file'])) {
     }
 
 
-    while (($row = fgetcsv($fh, 108192, ",")) !== false) {
+    while (($row = fgetcsv($fh, 108192, "\t")) !== false) {
         $doc = Record::Build($row, $rowNum, $_POST["tag"]);   
         $sha256 = hash('sha256', ''.$doc["doc"]["source_id"].'');
         print_r($doc);

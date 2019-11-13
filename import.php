@@ -45,11 +45,12 @@ if (isset($_FILES['file'])) {
 
 
     while (($row = fgetcsv($fh, 108192, "\t")) !== false) {
-        $doc = Record::Build($row, $rowNum, $_POST["tag"]);   
-        $sha256 = hash('sha256', ''.$doc["doc"]["source_id"].'');
+        $doc = Record::Build($row, $rowNum);
+        $id = $row[$rowNum["ID"]];   
+        //$sha256 = hash('sha256', ''.$row[$rowNum["ID"]].'');
         print_r($doc);
-        if (!is_null($sha256)) {
-            //$resultado_scopus = elasticsearch::elastic_update($sha256, $type, $doc);
+        if (!is_null($id)) {
+            //$resultado_scopus = Elasticsearch::update($id, $doc);
         }        
         //print_r($resultado_scopus);
         //print_r($doc["doc"]["source_id"]);
@@ -65,9 +66,17 @@ if (isset($_FILES['file'])) {
 
 class Record
 {
-    public static function build($row, $rowNum, $tag = "")
+    public static function build($row, $rowNum)
     {
         $doc["doc"]["title"] = str_replace('"', '', $row[$rowNum["title"]]);
+        if (!empty($row[$rowNum["contributor"]])) {
+            $doc["doc"]["contributor"] = explode(";", $row[$rowNum["contributor"]]);
+        }
+        $doc["doc"]["editions"] = $row[$rowNum["editions"]];
+        $doc["doc"]["publisher"] = $row[$rowNum["publisher"]];
+        $doc["doc"]["date"] = $row[$rowNum["date"]];
+
+
         $doc["doc_as_upsert"] = true;
         return $doc;
     }

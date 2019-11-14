@@ -58,7 +58,7 @@ if (isset($_FILES['file'])) {
         flush();        
 
     }
-    fclose($row);
+    fclose($fh);
 }
 
 //sleep(5);
@@ -74,6 +74,12 @@ class Record
         }
         $doc["doc"]["editions"] = $row[$rowNum["editions"]];
         $doc["doc"]["publisher"] = $row[$rowNum["publisher"]];
+        if (!empty($row[$rowNum["subjects"]])) {
+            $doc["doc"]["subjects"] = explode(";", $row[$rowNum["subjects"]]);
+        }
+        if (!empty($row[$rowNum["classifications"]])) {
+            $doc["doc"]["classifications"] = $row[$rowNum["classifications"]];
+        }                   
         $doc["doc"]["date"] = $row[$rowNum["date"]];
 
 

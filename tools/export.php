@@ -51,7 +51,7 @@ if (isset($_GET["format"])) {
                 $fields[] = $r["_source"]["title"];
 
                 if (!empty($r["_source"]["contributor"])) {
-                    $fields[] = $r["_source"]["contributor"][0];
+                    $fields[] = implode('; ', $r["_source"]["contributor"]);
                 } else {
                     $fields[] = "";
                 }                

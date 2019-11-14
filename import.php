@@ -3,10 +3,6 @@
 require 'inc/config.php';
 require 'inc/functions.php';
 
-print_r($_REQUEST);
-echo "<br/><br/>";
-print_r($_FILES);
-
 if (isset($_FILES['file'])) {
 
     $fh = fopen($_FILES['file']['tmp_name'], 'r+');
@@ -46,23 +42,20 @@ if (isset($_FILES['file'])) {
 
     while (($row = fgetcsv($fh, 108192, "\t")) !== false) {
         $doc = Record::Build($row, $rowNum);
-        $id = $row[$rowNum["ID"]];   
-        //$sha256 = hash('sha256', ''.$row[$rowNum["ID"]].'');
-        print_r($doc);
+        $id = $row[$rowNum["ID"]];
         if (!is_null($id)) {
-            //$resultado_scopus = Elasticsearch::update($id, $doc);
-        }        
-        //print_r($resultado_scopus);
-        //print_r($doc["doc"]["source_id"]);
-        echo "<br/><br/><br/>";
+            $result = Elasticsearch::update($id, $doc);            
+        }
         flush();        
 
     }
     fclose($fh);
+
+    sleep(5);
+    echo '<script>window.location = \'index.php\'</script>';
 }
 
-//sleep(5);
-//echo '<script>window.location = \'result_trabalhos.php?filter[]=type:"Work"&filter[]=tag:"'.$_POST["tag"].'"\'</script>';
+
 
 class Record
 {

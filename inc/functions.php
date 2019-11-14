@@ -46,7 +46,6 @@ class Elasticsearch
     public static function get($_id, $fields, $alternative_index = "")
     {
         global $index;
-        global $type;
         global $client;
         $params = [];
 

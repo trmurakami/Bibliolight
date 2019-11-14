@@ -1,8 +1,8 @@
 # Bibliolight
+
 Software livre para gestão de acervos bibliográficos
 
-Você pode experimentar uma [versão demo online](http://35.226.140.213/bibliolight/)
-
+Você pode experimentar uma [versão demo online](http://tecbib.com/bibliolight/)
 
 ## Dependencias
 
@@ -41,6 +41,3 @@ Obs: A versão Windows só é possível graças ao [PHP Desktop](https://github.
 ## Doação
 
 Você pode ajudar o projeto doando qualquer quantia: [Pagseguro](https://pag.ae/7VbJhhRHP)
-
-
-

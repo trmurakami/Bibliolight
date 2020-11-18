@@ -17,23 +17,8 @@ if (isset($_GET["format"])) {
         if (!empty($_GET)) {
             $result_get = Requests::getParser($_GET);
             $query = $result_get['query'];
-            $limit = $result_get['limit'];
-            $page = $result_get['page'];
-            $skip = $result_get['skip'];
-
-            if (isset($_GET["sort"])) {
-                $query['sort'] = [
-                    ['title.keyword' => ['order' => 'asc']],
-                ];
-            } else {
-                $query['sort'] = [
-                    ['date.keyword' => ['order' => 'desc']],
-                ];
-            }
-
             $params = [];
             $params["index"] = $index;
-            $params["type"] = $index;
             $params["size"] = 50;
             $params["scroll"] = "30s";
             $params["body"] = $query;
@@ -90,11 +75,7 @@ if (isset($_GET["format"])) {
                     $fields[] = $r["_source"]["classifications"];
                 } else {
                     $fields[] = "";
-                }                 
-
-  
-
-
+                }
                 $content[] = implode("\t", $fields);
                 unset($fields);
 

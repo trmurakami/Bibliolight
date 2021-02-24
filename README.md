@@ -38,6 +38,16 @@ Executar o arquivo bibliolight.exe
 
 Obs: A versão Windows só é possível graças ao [PHP Desktop](https://github.com/cztomczak/phpdesktop)
 
+
+## Execução via docker
+
+Baixar e instalar o [docker compose](https://docs.docker.com/compose/install/)
+
+...
+cp inc/config.docker.php inc/config.php
+docker-compose up
+...
+
 ## Doação
 
 Você pode ajudar o projeto doando qualquer quantia: [Pagseguro](https://pag.ae/7VbJhhRHP)

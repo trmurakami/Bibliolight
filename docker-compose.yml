@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  php:
+    build:
+      context: .
+    image: bibliolight
+    container_name: bibliolight
+    ports:
+      - "9000:9000"
+    #volumes:
+    #  - ".:/var/www/html/" 
+    command: php -S 0.0.0.0:9000 
+    links:
+      - elasticsearch
+    networks:
+      - elastic
+
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.monitoring.enabled: "true"
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
